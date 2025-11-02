@@ -515,7 +515,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support & Contact
 
 For support or inquiries:
-- **Email:** support@autobank-pro.com
+- **Email:** asaipr1223@gmail.com
 - **GitHub Issues:** [Open an issue](https://github.com/yourusername/autobank-pro/issues)
 - **Documentation:** [Full docs](https://docs.autobank-pro.com)
 
@@ -533,7 +533,7 @@ For support or inquiries:
 **Version:** 1.0.0  
 **Last Updated:** January 2025  
 **Maintainer:** A.SAI PRANEETH REDDY.
-
+**Created BY :** A.SAI PRANEETH REDDY.
 ---
 
 ## 📊 Key Metrics
@@ -549,5 +549,6 @@ For support or inquiries:
 | Database Consistency | 100% (Atomic Transactions) |
 
 ---
-
+CREATED BY THE A.SAI PRANEETH REDDY
+asaipr1223@gmail.com
 **Happy Banking! 🏦💳**

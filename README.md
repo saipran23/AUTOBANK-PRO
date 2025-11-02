@@ -531,9 +531,8 @@ For support or inquiries:
 ---
 
 **Version:** 1.0.0  
-**Last Updated:** January 2025  
-**Maintainer:** A.SAI PRANEETH REDDY.
-**Created BY :** A.SAI PRANEETH REDDY.
+**Last Updated:** NOVEMBER 2025  
+
 ---
 
 ## 📊 Key Metrics

@@ -78,7 +78,7 @@ The application features atomic database transactions, real-time balance updates
 - **React Hot Module Replacement (HMR)** - Fast refresh during development
 
 ### Deployment
-- **Vercel** or **Netlify** - Frontend hosting
+- **Vercel** - Frontend hosting
 - **Firebase Hosting** - Full-stack deployment option
 - **Docker** - Containerization (optional)
 

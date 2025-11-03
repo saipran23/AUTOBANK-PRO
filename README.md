@@ -80,7 +80,7 @@ The application features atomic database transactions, real-time balance updates
 ### Deployment
 - **Vercel** - Frontend hosting
 - **Firebase Hosting** - Full-stack deployment option
-- **Docker** - Containerization (optional)
+
 
 ---
 

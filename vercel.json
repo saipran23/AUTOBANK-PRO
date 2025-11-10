@@ -3,11 +3,11 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "env": {
-    "VITE_FIREBASE_API_KEY": "AIzaSyBF1XXGPz7BwCIgOfSdDZ-EwLJBBNnGdDs",
-    "VITE_FIREBASE_AUTH_DOMAIN": "autobank-e9b84.firebaseapp.com",
-    "VITE_FIREBASE_PROJECT_ID": "autobank-e9b84",
-    "VITE_FIREBASE_STORAGE_BUCKET": "autobank-e9b84.firebasestorage.app",
-    "VITE_FIREBASE_MESSAGING_SENDER_ID": "201037656743",
-    "VITE_FIREBASE_APP_ID": "1:201037656743:web:d92426cb2f2e4fbe34a182"
+    "VITE_FIREBASE_API_KEY": "----------------------------------------------------------",
+    "VITE_FIREBASE_AUTH_DOMAIN": "--------------------------------------------------------",
+    "VITE_FIREBASE_PROJECT_ID": "--------------------------------------------------------",
+    "VITE_FIREBASE_STORAGE_BUCKET": "------------------------------------------------------",
+    "VITE_FIREBASE_MESSAGING_SENDER_ID": "--------------------------------------------------",
+    "VITE_FIREBASE_APP_ID": "-----------------------------------------------------------------"
   }
 }

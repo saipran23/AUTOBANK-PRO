@@ -1,7 +1,7 @@
 -- Location: supabase/migrations/20241023111729_autobank_auth_system.sql
 -- Schema Analysis: Creating fresh banking authentication schema
 -- Integration Type: Complete authentication system for AutoBank Pro
--- Dependencies: auth.users (Supabase managed)
+-- Dependencies: auth.users (Supabase managed--
 
 -- 1. Banking-specific User Roles
 CREATE TYPE public.banking_user_role AS ENUM ('customer', 'employee', 'admin', 'manager');

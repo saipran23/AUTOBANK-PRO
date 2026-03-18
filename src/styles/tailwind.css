@@ -1,70 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Core Colors */
-    --color-background: #F8FAFC; /* slate-50 */
-    --color-foreground: #0F172A; /* slate-900 */
-    --color-border: #E2E8F0; /* slate-200 */
-    --color-input: #FFFFFF; /* white */
-    --color-ring: #1E3A8A; /* blue-800 */
+    /* Neo-Brutalism Color Palette */
+    --color-background: #FFFEF0;
+    --color-foreground: #000000;
+    --color-border: #000000;
+    --color-input: #FFFFFF;
+    --color-ring: #FFD60A;
     
     /* Card Colors */
-    --color-card: #FFFFFF; /* white */
-    --color-card-foreground: #0F172A; /* slate-900 */
+    --color-card: #FFFFFF;
+    --color-card-foreground: #000000;
     
     /* Popover Colors */
-    --color-popover: #FFFFFF; /* white */
-    --color-popover-foreground: #0F172A; /* slate-900 */
+    --color-popover: #FFFFFF;
+    --color-popover-foreground: #000000;
     
     /* Muted Colors */
-    --color-muted: #F1F5F9; /* slate-100 */
-    --color-muted-foreground: #475569; /* slate-600 */
+    --color-muted: #F5F5F0;
+    --color-muted-foreground: #555555;
     
-    /* Primary Colors */
-    --color-primary: #1E3A8A; /* blue-800 */
-    --color-primary-foreground: #FFFFFF; /* white */
+    /* Primary Colors - Yellow */
+    --color-primary: #FFD60A;
+    --color-primary-foreground: #000000;
     
     /* Secondary Colors */
-    --color-secondary: #64748B; /* slate-500 */
-    --color-secondary-foreground: #FFFFFF; /* white */
+    --color-secondary: #F5F5F0;
+    --color-secondary-foreground: #000000;
     
-    /* Accent Colors */
-    --color-accent: #059669; /* emerald-600 */
-    --color-accent-foreground: #FFFFFF; /* white */
+    /* Accent Colors - Teal */
+    --color-accent: #00C9B1;
+    --color-accent-foreground: #000000;
     
     /* Success Colors */
-    --color-success: #10B981; /* emerald-500 */
-    --color-success-foreground: #FFFFFF; /* white */
+    --color-success: #00C9B1;
+    --color-success-foreground: #000000;
     
     /* Warning Colors */
-    --color-warning: #F59E0B; /* amber-500 */
-    --color-warning-foreground: #FFFFFF; /* white */
+    --color-warning: #FFD60A;
+    --color-warning-foreground: #000000;
     
     /* Error/Destructive Colors */
-    --color-error: #DC2626; /* red-600 */
-    --color-error-foreground: #FFFFFF; /* white */
-    --color-destructive: #DC2626; /* red-600 */
-    --color-destructive-foreground: #FFFFFF; /* white */
+    --color-error: #FF6B6B;
+    --color-error-foreground: #000000;
+    --color-destructive: #FF6B6B;
+    --color-destructive-foreground: #000000;
+
+    /* Border radius - minimal for neo-brutalism */
+    --radius: 0px;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-black;
   }
   
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
+    @apply bg-[#FFFEF0] text-black;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 700;
   }
   
   .font-mono {
@@ -73,23 +76,65 @@
 }
 
 @layer components {
+  /* Neo-brutalism card */
+  .nb-card {
+    @apply bg-white border-2 border-black;
+    box-shadow: 4px 4px 0px #000;
+  }
+  
+  /* Neo-brutalism button */
+  .nb-button {
+    @apply bg-[#FFD60A] text-black border-2 border-black font-bold px-4 py-2;
+    box-shadow: 4px 4px 0px #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  
+  .nb-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+  }
+  
+  .nb-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px #000;
+  }
+  
+  /* Neo-brutalism input */
+  .nb-input {
+    @apply bg-white border-2 border-black px-3 py-2 text-black font-medium;
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .nb-input:focus {
+    box-shadow: 3px 3px 0px #FFD60A;
+    outline: none;
+  }
+  
+  /* Utility shadows */
   .banking-shadow-sm {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 0px #000;
   }
   
   .banking-shadow-md {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 0px #000;
   }
   
   .banking-shadow-lg {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 6px 6px 0px #000;
   }
   
   .banking-transition {
-    transition: all 200ms ease-out;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
   
   .banking-transition-slow {
-    transition: all 400ms ease-out;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Neo-brutalism tag/badge */
+  .nb-badge {
+    @apply inline-block border-2 border-black px-2 py-0.5 text-xs font-bold;
+    box-shadow: 2px 2px 0px #000;
   }
 }

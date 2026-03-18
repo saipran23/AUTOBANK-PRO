@@ -65,25 +65,25 @@ export default function Header() {
     };
 
     return (
-        <header className="fixed top-0 left-0 w-full h-16 z-50 bg-surface border-b border-card-border shadow-sm">
+        <header className="fixed top-0 left-0 w-full h-16 z-50 bg-white border-b-2 border-black shadow-[0_4px_0_#000]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex items-center space-x-8">
                         <button onClick={() => navigate('/customer-dashboard')} className="flex items-center space-x-2">
-                            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-lg">A</span>
+                            <div className="w-8 h-8 bg-[#FFD60A] border-2 border-black flex items-center justify-center shadow-[2px_2px_0px_#000]">
+                                <span className="text-black font-black text-lg">A</span>
                             </div>
-                            <span className="text-xl font-bold text-primary hidden sm:block">AutoBank Pro</span>
+                            <span className="text-xl font-black text-black hidden sm:block">AutoBank Pro</span>
                         </button>
                         {/* Desktop Navigation */}
                         <nav className="hidden md:flex space-x-1">
                             <button
                                 onClick={() => navigate('/customer-dashboard')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                                className={`px-4 py-2 text-sm font-bold border-2 transition-all ${
                                     isActive('/customer-dashboard')
-                                        ? 'bg-primary text-white'
-                                        : 'text-text-secondary hover:bg-secondary hover:text-text'
+                                        ? 'bg-[#FFD60A] border-black shadow-[2px_2px_0px_#000]'
+                                        : 'border-transparent hover:bg-[#FFD60A] hover:border-black hover:shadow-[2px_2px_0px_#000]'
                                 }`}
                             >
                                 Dashboard
@@ -98,40 +98,40 @@ export default function Header() {
                                         navigate('/account-details');
                                     }
                                 }}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                                className={`px-4 py-2 text-sm font-bold border-2 transition-all ${
                                     location.pathname.startsWith('/account-details')
-                                        ? 'bg-primary text-white'
-                                        : 'text-text-secondary hover:bg-secondary hover:text-text'
+                                        ? 'bg-[#FFD60A] border-black shadow-[2px_2px_0px_#000]'
+                                        : 'border-transparent hover:bg-[#FFD60A] hover:border-black hover:shadow-[2px_2px_0px_#000]'
                                 }`}
                             >
                                 Accounts
                             </button>
                             <button
                                 onClick={() => navigate('/transfer-money')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                                className={`px-4 py-2 text-sm font-bold border-2 transition-all ${
                                     isActive('/transfer-money')
-                                        ? 'bg-primary text-white'
-                                        : 'text-text-secondary hover:bg-secondary hover:text-text'
+                                        ? 'bg-[#FFD60A] border-black shadow-[2px_2px_0px_#000]'
+                                        : 'border-transparent hover:bg-[#FFD60A] hover:border-black hover:shadow-[2px_2px_0px_#000]'
                                 }`}
                             >
                                 Transfer
                             </button>
                             <button
                                 onClick={() => navigate('/loan-application')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                                className={`px-4 py-2 text-sm font-bold border-2 transition-all ${
                                     isActive('/loan-application')
-                                        ? 'bg-primary text-white'
-                                        : 'text-text-secondary hover:bg-secondary hover:text-text'
+                                        ? 'bg-[#FFD60A] border-black shadow-[2px_2px_0px_#000]'
+                                        : 'border-transparent hover:bg-[#FFD60A] hover:border-black hover:shadow-[2px_2px_0px_#000]'
                                 }`}
                             >
                                 Loans
                             </button>
                             <button
                                 onClick={() => navigate('/support')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                                className={`px-4 py-2 text-sm font-bold border-2 transition-all ${
                                     isActive('/support')
-                                        ? 'bg-primary text-white'
-                                        : 'text-text-secondary hover:bg-secondary hover:text-text'
+                                        ? 'bg-[#FFD60A] border-black shadow-[2px_2px_0px_#000]'
+                                        : 'border-transparent hover:bg-[#FFD60A] hover:border-black hover:shadow-[2px_2px_0px_#000]'
                                 }`}
                             >
                                 Support
@@ -141,14 +141,14 @@ export default function Header() {
                     {/* Right Side - User Menu */}
                     <div className="flex items-center space-x-4">
                         {/* Notifications */}
-                        <button className="p-2 text-text-secondary hover:text-text rounded-full hover:bg-secondary transition-colors relative hidden sm:block">
+                        <button className="p-2 text-black border-2 border-transparent hover:border-black hover:bg-[#FFD60A] hover:shadow-[2px_2px_0px_#000] transition-all relative hidden sm:block">
                             <Icon name="Bell" size={20} />
-                            <span className="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+                            <span className="absolute top-1 right-1 w-2 h-2 bg-[#FF6B6B] border border-black rounded-none"></span>
                         </button>
                         {/* Mobile Menu Toggle */}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="md:hidden p-2 text-text-secondary hover:text-text rounded-md hover:bg-secondary"
+                            className="md:hidden p-2 text-black border-2 border-black hover:bg-[#FFD60A] transition-all"
                         >
                             <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={24} />
                         </button>
@@ -156,73 +156,63 @@ export default function Header() {
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setShowDropdown(!showDropdown)}
-                                className="flex items-center space-x-3 focus:outline-none hover:bg-secondary rounded-lg px-3 py-2 transition-colors"
+                                className="flex items-center space-x-3 focus:outline-none hover:bg-[#FFD60A] border-2 border-transparent hover:border-black hover:shadow-[2px_2px_0px_#000] px-3 py-2 transition-all"
                             >
-                                <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
+                                <div className="w-10 h-10 bg-[#FFD60A] border-2 border-black flex items-center justify-center font-black text-black shadow-[2px_2px_0px_#000]">
                                     {getInitials(userName)}
                                 </div>
                                 <div className="hidden lg:block text-left">
-                                    <p className="text-sm font-semibold text-text">{userName}</p>
-                                    <p className="text-xs text-text-secondary">{userEmail}</p>
+                                    <p className="text-sm font-bold text-black">{userName}</p>
+                                    <p className="text-xs text-gray-600">{userEmail}</p>
                                 </div>
-                                <Icon name="ChevronDown" size={16} className="text-text-secondary hidden sm:block" />
+                                <Icon name="ChevronDown" size={16} className="text-black hidden sm:block" />
                             </button>
                             {showDropdown && (
-                                <div className="absolute right-0 mt-2 w-64 rounded-xl shadow-2xl border border-card-border py-2"
-                                     style={{
-                                         background: "rgba(255,255,255,0.85)",       // semi-transparent white background
-                                         backdropFilter: "blur(12px)",                // glassmorphism blur effect
-                                         WebkitBackdropFilter: "blur(12px)",
-                                         zIndex: 10000,                               // high z-index to appear on top
-                                         boxShadow: "0 8px 32px 0 rgba(0,0,0,0.1)",  // stronger shadow for depth
-                                     }}
+                                <div className="absolute right-0 mt-2 w-64 bg-white border-2 border-black shadow-[4px_4px_0px_#000] py-2"
+                                     style={{ zIndex: 10000 }}
                                 >
-                                    <div className="px-4 py-3 border-b border-card-border">
-                                        <p className="text-sm font-semibold text-text">{userName}</p>
-                                        <p className="text-xs text-text-secondary">{userEmail}</p>
+                                    <div className="px-4 py-3 border-b-2 border-black">
+                                        <p className="text-sm font-bold text-black">{userName}</p>
+                                        <p className="text-xs text-gray-600">{userEmail}</p>
                                     </div>
-                                    {/* Profile Settings */}
                                     <button
                                         onClick={() => handleMenuItemClick('/profile-settings')}
-                                        className="w-full px-4 py-2 text-left text-sm hover:bg-secondary transition-colors flex items-center space-x-3"
+                                        className="w-full px-4 py-2 text-left text-sm font-medium hover:bg-[#FFD60A] transition-colors flex items-center space-x-3"
                                     >
                                         <Icon name="User" size={16} />
                                         <span>Profile Settings</span>
                                     </button>
-                                    {/* Security */}
                                     <button
                                         onClick={() => handleMenuItemClick('/security')}
-                                        className="w-full px-4 py-2 text-left text-sm hover:bg-secondary transition-colors flex items-center space-x-3"
+                                        className="w-full px-4 py-2 text-left text-sm font-medium hover:bg-[#FFD60A] transition-colors flex items-center space-x-3"
                                     >
                                         <Icon name="Lock" size={16} />
                                         <span>Security</span>
                                     </button>
-                                    {/* Notifications */}
                                     <button
                                         onClick={() => handleMenuItemClick('/notifications')}
-                                        className="w-full px-4 py-2 text-left text-sm hover:bg-secondary transition-colors flex items-center space-x-3"
+                                        className="w-full px-4 py-2 text-left text-sm font-medium hover:bg-[#FFD60A] transition-colors flex items-center space-x-3"
                                     >
                                         <Icon name="Bell" size={16} />
                                         <span>Notifications</span>
                                     </button>
-                                    {/* Help Center */}
                                     <button
                                         onClick={() => handleMenuItemClick('/support')}
-                                        className="w-full px-4 py-2 text-left text-sm hover:bg-secondary transition-colors flex items-center space-x-3"
+                                        className="w-full px-4 py-2 text-left text-sm font-medium hover:bg-[#FFD60A] transition-colors flex items-center space-x-3"
                                     >
                                         <Icon name="HelpCircle" size={16} />
                                         <span>Help Center</span>
                                     </button>
-                                    <div className="border-t border-card-border mt-2 pt-2">
+                                    <div className="border-t-2 border-black mt-2 pt-2">
                                         <button
                                             onClick={handleSignOut}
-                                            className="w-full px-4 py-2 text-left text-sm text-error hover:bg-error/10 transition-colors flex items-center space-x-3"
+                                            className="w-full px-4 py-2 text-left text-sm font-medium text-[#FF6B6B] hover:bg-[#FF6B6B] hover:text-black transition-colors flex items-center space-x-3"
                                         >
                                             <Icon name="LogOut" size={16} />
                                             <span>Sign Out</span>
                                         </button>
                                     </div>
-                                    <div className="px-4 py-2 border-t border-card-border text-xs text-text-secondary">
+                                    <div className="px-4 py-2 border-t-2 border-black text-xs text-gray-500 font-medium">
                                         Schedule or pay bills
                                     </div>
                                 </div>
@@ -232,9 +222,8 @@ export default function Header() {
                 </div>
                 {/* Mobile Navigation */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-card-border">
+                    <div className="md:hidden py-4 border-t-2 border-black">
                         <nav className="flex flex-col space-y-2">
-                            {/* Mobile nav items can go here */}
                         </nav>
                     </div>
                 )}

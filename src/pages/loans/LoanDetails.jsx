@@ -42,39 +42,40 @@ const LoanDetails = () => {
         fetchLoan();
     }, [id, user]);
 
-    if (loading) return <div className="p-6 text-center">Loading...</div>;
-    if (!loan) return <div className="p-6 text-center text-red-600">Loan not found</div>;
+    if (loading) return <div className="min-h-screen bg-[#FFFEF0] flex items-center justify-center p-6 text-center font-bold">Loading...</div>;
+    if (!loan) return <div className="min-h-screen bg-[#FFFEF0] flex items-center justify-center p-6 text-center text-[#FF6B6B] font-bold">Loan not found</div>;
 
     return (
-        <div className="max-w-3xl mx-auto p-6 bg-card rounded shadow">
+        <div className="min-h-screen bg-[#FFFEF0] p-6">
+        <div className="max-w-3xl mx-auto bg-white border-2 border-black shadow-[4px_4px_0px_#000] p-8">
             <button
-                className="mb-4 px-4 py-2 bg-primary text-white rounded"
+                className="mb-4 px-4 py-2 bg-white border-2 border-black font-bold shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
                 onClick={() => navigate("/loans")}
             >
-                Back to Loans
+                ← Back to Loans
             </button>
-            <h1 className="text-2xl font-bold mb-6">Loan Details</h1>
-            <div className="mb-4">
+            <h1 className="text-2xl font-black text-black mb-6">Loan Details</h1>
+            <div className="border-b-2 border-black pb-4 mb-4">
                 <strong>Loan Type: </strong> {loan.loanType || loan.loanDetails?.loanType || "N/A"}
             </div>
-            <div className="mb-4">
-                <strong>Status: </strong> {loan.status || "N/A"}
+            <div className="border-b-2 border-black pb-4 mb-4">
+                <strong>Status: </strong> <span className="border-2 border-black font-bold px-2 py-0.5">{loan.status || "N/A"}</span>
             </div>
-            <div className="mb-4">
-                <strong>Amount: </strong> ₹{loan.loanAmount?.toLocaleString() || loan.principalAmount?.toLocaleString() || 0}
+            <div className="border-b-2 border-black pb-4 mb-4">
+                <strong>Amount: </strong> <span className="font-black text-black text-2xl">₹{loan.loanAmount?.toLocaleString() || loan.principalAmount?.toLocaleString() || 0}</span>
             </div>
-            <div className="mb-4">
+            <div className="border-b-2 border-black pb-4 mb-4">
                 <strong>EMI: </strong> ₹{loan.emi || loan.monthlyPayment || "N/A"}
             </div>
-            <div className="mb-4">
+            <div className="border-b-2 border-black pb-4 mb-4">
                 <strong>Term: </strong> {loan.tenure || loan.totalTerm || "N/A"} months
             </div>
-            <div className="mb-4">
+            <div className="border-b-2 border-black pb-4 mb-4">
                 <strong>Interest Rate: </strong> {loan.interestRate || loan.approvedRate || "N/A"}%
             </div>
             <div className="mb-4">
                 <strong>Timeline:</strong>
-                <ul className="list-disc pl-5 mt-2 max-h-48 overflow-auto text-sm text-muted-foreground">
+                <ul className="list-disc pl-5 mt-2 max-h-48 overflow-auto text-sm text-gray-600">
                     {(loan.timeline || []).map((event, idx) => (
                         <li key={idx}>
                             <span className="font-semibold">{event.status}</span>: {event.description} on {event.date && event.date.seconds
@@ -84,6 +85,7 @@ const LoanDetails = () => {
                     ))}
                 </ul>
             </div>
+        </div>
         </div>
     );
 };

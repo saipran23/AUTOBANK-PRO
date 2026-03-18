@@ -40,61 +40,61 @@ const TransactionsPage = () => {
     }, []);
 
     if (loading) {
-        return <div className="p-6">Loading transactions...</div>;
+        return <div className="min-h-screen bg-[#FFFEF0] p-6">Loading transactions...</div>;
     }
 
     return (
-        <div>
+        <div className="min-h-screen bg-[#FFFEF0]">
             <Header />
             <Breadcrumb />
 
             <main className="container mx-auto p-6">
-                <h1 className="text-3xl font-bold mb-6">Transaction History</h1>
+                <h1 className="text-3xl font-black text-black mb-6">Transaction History</h1>
                 {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <div className="bg-red-100 border-2 border-[#FF6B6B] text-red-700 px-4 py-3 rounded-none mb-4">
                         {error}
                     </div>
                 )}
                 {transactions.length === 0 ? (
-                    <div className="bg-gray-100 rounded-lg p-6 text-center text-gray-600">
+                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-6 text-center text-gray-600">
                         No transactions found
                     </div>
                 ) : (
-                    <div className="bg-white rounded-lg shadow overflow-hidden">
+                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none overflow-hidden">
                         <table className="w-full">
-                            <thead className="bg-gray-100 border-b">
+                            <thead className="bg-[#FFFEF0] border-b-2 border-black">
                             <tr>
-                                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                                <th className="px-6 py-3 text-left text-sm font-black text-black">
                                     Date & Time
                                 </th>
-                                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                                <th className="px-6 py-3 text-left text-sm font-black text-black">
                                     To Account
                                 </th>
-                                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                                <th className="px-6 py-3 text-left text-sm font-black text-black">
                                     Amount
                                 </th>
-                                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                                <th className="px-6 py-3 text-left text-sm font-black text-black">
                                     Status
                                 </th>
-                                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                                <th className="px-6 py-3 text-left text-sm font-black text-black">
                                     Transaction ID
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             {transactions.map((txn) => (
-                                <tr key={txn.id} className="border-b hover:bg-gray-50">
+                                <tr key={txn.id} className="border-b border-black hover:bg-[#FFD60A] transition-all">
                                     <td className="px-6 py-4 text-sm text-gray-900">
                                         {txn.timestamp.toLocaleString()}
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-900">
                                         {txn.recipientAccountNumber}
                                     </td>
-                                    <td className="px-6 py-4 text-sm font-semibold text-gray-900">
+                                    <td className="px-6 py-4 text-sm text-[#FF6B6B] font-bold">
                                         ₹{txn.amount?.toLocaleString()}
                                     </td>
                                     <td className="px-6 py-4 text-sm">
-                      <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">
+                      <span className="border-2 border-black font-bold px-2 py-1 text-xs">
                         {txn.status}
                       </span>
                                     </td>

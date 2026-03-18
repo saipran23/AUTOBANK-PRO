@@ -59,12 +59,12 @@ const LoginForm = () => {
         <div className="w-full space-y-6">
             {/* Error Alert */}
             {errors.general && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="p-4 bg-[#FF6B6B]/10 border-2 border-[#FF6B6B]">
                     <div className="flex gap-3">
                         <svg className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                         </svg>
-                        <p className="text-red-700 text-sm font-medium">{errors.general}</p>
+                        <p className="text-black font-bold text-sm">{errors.general}</p>
                     </div>
                 </div>
             )}
@@ -73,7 +73,7 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Email Input */}
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-bold text-black mb-2">
                         Email Address
                     </label>
                     <input
@@ -83,13 +83,13 @@ const LoginForm = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         disabled={isLoading}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:bg-gray-100"
+                        className="w-full px-4 py-3 border-2 border-black bg-white text-black placeholder:text-gray-400 focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition disabled:bg-gray-100"
                     />
                 </div>
 
                 {/* Password Input */}
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm font-bold text-black mb-2">
                         Password
                     </label>
                     <input
@@ -99,7 +99,7 @@ const LoginForm = () => {
                         value={formData.password}
                         onChange={handleInputChange}
                         disabled={isLoading}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition disabled:bg-gray-100"
+                        className="w-full px-4 py-3 border-2 border-black bg-white text-black placeholder:text-gray-400 focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition disabled:bg-gray-100"
                     />
                 </div>
 
@@ -122,7 +122,7 @@ const LoginForm = () => {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition shadow-md hover:shadow-lg transform hover:scale-[1.01] active:scale-95"
+                    className="w-full py-3 bg-[#FFD60A] text-black font-black border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] disabled:bg-gray-300 disabled:shadow-none transition-all"
                 >
                     {isLoading ? (
                         <span className="flex items-center justify-center gap-2">
@@ -142,7 +142,7 @@ const LoginForm = () => {
                     type="button"
                     onClick={() => window.location.href = "#biometric"}
                     disabled={isLoading}
-                    className="w-full py-2.5 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-50 disabled:opacity-50 transition"
+                    className="w-full py-2.5 border-2 border-black text-black font-bold hover:bg-[#FFD60A] hover:shadow-[2px_2px_0px_#000] disabled:opacity-50 transition-all"
                 >
                     🔐 Biometric Login
                 </button>
@@ -151,10 +151,10 @@ const LoginForm = () => {
             {/* Divider */}
             <div className="relative py-2">
                 <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300"></div>
+                    <div className="w-full border-t border-black"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500 font-medium">or</span>
+                    <span className="px-2 bg-white text-gray-600 font-medium">or</span>
                 </div>
             </div>
 
@@ -163,14 +163,14 @@ const LoginForm = () => {
                 <button
                     type="button"
                     onClick={() => navigate("/forgot-password")}
-                    className="block w-full text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline transition"
+                    className="block w-full text-sm text-black font-bold hover:underline hover:text-black transition"
                 >
                     Forgot Password?
                 </button>
                 <button
                     type="button"
                     onClick={() => navigate("/signup")}
-                    className="block w-full text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline transition"
+                    className="block w-full text-sm text-black font-bold hover:underline hover:text-black transition"
                 >
                     Don't have an account? Sign Up
                 </button>
@@ -178,7 +178,7 @@ const LoginForm = () => {
                 <button
                     type="button"
                     onClick={() => navigate("/employee/login")}
-                    className="block w-full text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline transition"
+                    className="block w-full text-sm text-black font-bold hover:underline hover:text-black transition"
                 >
                     👨‍💼 Employee Login
                 </button>
@@ -186,12 +186,12 @@ const LoginForm = () => {
 
             {/* Failed Attempts Warning */}
             {failedAttempts >= 3 && failedAttempts < 5 && (
-                <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="p-4 bg-[#FFD60A]/20 border-2 border-[#FFD60A]">
                     <div className="flex gap-3">
                         <svg className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                         </svg>
-                        <p className="text-yellow-700 text-sm font-medium">
+                        <p className="text-black font-bold text-sm">
                             ⚠️ {5 - failedAttempts} login attempts remaining
                         </p>
                     </div>

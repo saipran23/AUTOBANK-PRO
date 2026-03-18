@@ -105,14 +105,14 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
         <form onSubmit={handleSubmit} className="space-y-6">
             {/* Source Account */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-black mb-2">
                     From Account
                 </label>
                 <select
                     name="sourceAccount"
                     value={formData.sourceAccount}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-black focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
                 >
                     <option value="">Select an account</option>
                     {accounts.map(account => (
@@ -122,12 +122,12 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
                     ))}
                 </select>
                 {errors.sourceAccount && (
-                    <p className="mt-1 text-sm text-red-600">{errors.sourceAccount}</p>
+                    <p className="mt-1 text-sm text-[#FF6B6B] font-bold">{errors.sourceAccount}</p>
                 )}
             </div>
             {sourceAccount && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-sm text-blue-800">
+                <div className="bg-[#FFD60A]/20 border-2 border-[#FFD60A] p-4">
+                    <p className="text-sm text-black font-bold">
                         Available Balance: <span className="font-bold">₹{sourceAccount.currentBalance.toLocaleString()}</span>
                     </p>
                 </div>
@@ -135,7 +135,7 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
 
             {/* Recipient Account Number */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-black mb-2">
                     Recipient Account Number (13 digits)
                 </label>
                 <input
@@ -145,16 +145,16 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
                     onChange={handleInputChange}
                     maxLength={13}
                     placeholder="Enter 13-digit account number"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-black focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
                 />
                 {errors.recipientAccount && (
-                    <p className="mt-1 text-sm text-red-600">{errors.recipientAccount}</p>
+                    <p className="mt-1 text-sm text-[#FF6B6B] font-bold">{errors.recipientAccount}</p>
                 )}
             </div>
 
             {/* Recipient IFSC Code */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-black mb-2">
                     IFSC Code (11 characters)
                 </label>
                 <input
@@ -164,10 +164,10 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
                     onChange={handleInputChange}
                     maxLength={11}
                     placeholder="Enter IFSC code (e.g., AUTB0001234)"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent uppercase"
+                    className="w-full px-4 py-3 border-2 border-black focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] uppercase"
                 />
                 {errors.recipientIFSC && (
-                    <p className="mt-1 text-sm text-red-600">{errors.recipientIFSC}</p>
+                    <p className="mt-1 text-sm text-[#FF6B6B] font-bold">{errors.recipientIFSC}</p>
                 )}
             </div>
 
@@ -176,14 +176,14 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
                 type="button"
                 onClick={handleVerifyAccount}
                 disabled={verifying || !formData.recipientAccount || !formData.recipientIFSC}
-                className="w-full py-2 px-4 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-2 px-4 bg-white border-2 border-black font-bold text-black shadow-[2px_2px_0px_#000] hover:bg-[#FFD60A] hover:shadow-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {verifying ? 'Verifying...' : accountVerified ? '✓ Account Verified' : 'Verify Recipient Account'}
             </button>
             {accountVerified && recipientInfo && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <p className="text-sm font-medium text-green-800 mb-2">✓ Account Verified Successfully</p>
-                    <div className="space-y-1 text-sm text-green-700">
+                <div className="bg-[#00C9B1]/10 border-2 border-[#00C9B1] p-4">
+                    <p className="text-sm font-bold text-black mb-2">✓ Account Verified Successfully</p>
+                    <div className="space-y-1 text-sm text-black">
                         <p><strong>Account Holder:</strong> {recipientInfo.recipientName}</p>
                         <p><strong>Bank:</strong> {recipientInfo.recipientBank}</p>
                     </div>
@@ -192,7 +192,7 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
 
             {/* Amount */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-black mb-2">
                     Amount (₹)
                 </label>
                 <input
@@ -203,16 +203,16 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
                     placeholder="Enter amount"
                     min="1"
                     step="0.01"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-black focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
                 />
                 {errors.amount && (
-                    <p className="mt-1 text-sm text-red-600">{errors.amount}</p>
+                    <p className="mt-1 text-sm text-[#FF6B6B] font-bold">{errors.amount}</p>
                 )}
             </div>
 
             {/* Memo */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-black mb-2">
                     Memo / Note (Optional)
                 </label>
                 <input
@@ -222,14 +222,14 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
                     onChange={handleInputChange}
                     placeholder="Add a note for this transfer"
                     maxLength={100}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-black focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
                 />
             </div>
 
             {/* Submit Button */}
             <button
                 type="submit"
-                className="w-full py-3 px-4 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors font-medium shadow-md"
+                className="w-full py-3 px-4 bg-[#FFD60A] text-black border-2 border-black font-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
             >
                 Continue to Review
             </button>

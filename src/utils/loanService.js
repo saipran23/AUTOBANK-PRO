@@ -12,27 +12,22 @@ import {
 } from 'firebase/firestore';
 
 // ⭐ FIXED: Search by personalDetails.email (nested field in Firestore)
+// NOTE: Must be called OUTSIDE runTransaction — getDocs is not transactional.
 const findCustomerByEmail = async (email) => {
     try {
-        console.log("🔍 Searching for customer with email:", email);
-
         const customersRef = collection(db, 'customers');
-        // ⭐ CRITICAL: Use nested path for the query
         const q = query(customersRef, where('personalDetails.email', '==', email));
         const snap = await getDocs(q);
 
         if (snap.empty) {
-            console.warn('⚠️ No customer found with email:', email);
             throw new Error(`Customer not found with email: ${email}`);
         }
 
-        console.log('✅ Customer found:', snap.docs[0].id);
         return {
             docId: snap.docs[0].id,
             data: snap.docs[0].data()
         };
     } catch (err) {
-        console.error('❌ Error finding customer:', err);
         throw err;
     }
 };
@@ -101,18 +96,14 @@ export const createLoanApplication = async (customerEmail, loanData) => {
         const applicationsCol = collection(db, "loanApplications");
         const docRef = await addDoc(applicationsCol, application);
 
-        console.log("✅ Loan application created:", docRef.id, "for email:", customerEmail);
         return { success: true, appId: docRef.id };
     } catch (err) {
-        console.error("❌ Error creating loan application:", err);
         return { success: false, error: err.message };
     }
 };
 
 export const approveLoanApplication = async (appId, customerEmail) => {
     try {
-        console.log("🔄 Starting approval for appId:", appId, "customerEmail:", customerEmail);
-
         if (!customerEmail) {
             return { success: false, error: 'Missing customer email' };
         }
@@ -137,19 +128,18 @@ export const approveLoanApplication = async (appId, customerEmail) => {
             return { success: false, error: 'Invalid loan amount in application' };
         }
 
-        console.log("📄 Loan data fetched:", {
-            amount: loanAmount,
-            type: loanData.loanType,
-            customerEmail
-        });
+        // Find customer BEFORE the transaction (getDocs cannot be used inside runTransaction)
+        const customerInfo = await findCustomerByEmail(customerEmail);
 
         return await runTransaction(db, async (transaction) => {
-            // FIND EXISTING CUSTOMER BY email
-            const customerInfo = await findCustomerByEmail(customerEmail);
             const userDocRef = doc(db, 'customers', customerInfo.docId);
-            const user = customerInfo.data;
 
-            console.log("✅ Customer found:", customerInfo.docId);
+            // Read the user document atomically within the transaction
+            const userSnap = await transaction.get(userDocRef);
+            if (!userSnap.exists()) {
+                throw new Error('Customer document not found');
+            }
+            const user = userSnap.data();
 
             if (!user.accounts || !Array.isArray(user.accounts) || user.accounts.length === 0) {
                 throw new Error('Customer has no valid accounts.');
@@ -185,7 +175,6 @@ export const approveLoanApplication = async (appId, customerEmail) => {
             };
 
             transaction.set(loanDocRef, loanRecord);
-            console.log("✅ Loan document created:", loanId);
 
             // UPDATE EXISTING CUSTOMER'S PRIMARY ACCOUNT BALANCE
             const account = { ...user.accounts[0] };
@@ -195,12 +184,6 @@ export const approveLoanApplication = async (appId, customerEmail) => {
 
             account.currentBalance = currentBalance + loanAmount;
             account.availableBalance = availableBalance + loanAmount;
-
-            console.log("💰 Balance update:", {
-                previousBalance: currentBalance,
-                disburseAmount: loanAmount,
-                newBalance: account.currentBalance
-            });
 
             // Add transaction record to account
             const transaction_record = {
@@ -229,8 +212,6 @@ export const approveLoanApplication = async (appId, customerEmail) => {
                 lastUpdated: serverTimestamp()
             });
 
-            console.log("✅ Customer account updated - new balance:", account.currentBalance);
-
             // Update application status
             const appDocRef = doc(db, "loanApplications", appId);
             transaction.update(appDocRef, {
@@ -246,7 +227,6 @@ export const approveLoanApplication = async (appId, customerEmail) => {
                     }
                 ]
             });
-            console.log("✅ Loan application status updated to Approved");
 
             return {
                 success: true,
@@ -257,26 +237,36 @@ export const approveLoanApplication = async (appId, customerEmail) => {
         });
 
     } catch (err) {
-        console.error("❌ Approval transaction error:", err);
         return { success: false, error: err.message };
     }
 };
 
 export const repayEMI = async (customerEmail, loanId) => {
     try {
-        console.log("🔄 Starting EMI repayment for loanId:", loanId, "customerEmail:", customerEmail);
+        // Find customer BEFORE the transaction (getDocs cannot be used inside runTransaction)
+        const customerInfo = await findCustomerByEmail(customerEmail);
 
         return await runTransaction(db, async (transaction) => {
-            const customerInfo = await findCustomerByEmail(customerEmail);
             const userRef = doc(db, 'customers', customerInfo.docId);
-            const userData = customerInfo.data;
             const loanRef = doc(db, 'customers', customerInfo.docId, "loans", loanId);
 
-            const loanSnap = await transaction.get(loanRef);
+            // Read both documents atomically within the transaction
+            const [userSnap, loanSnap] = await Promise.all([
+                transaction.get(userRef),
+                transaction.get(loanRef),
+            ]);
 
+            if (!userSnap.exists()) throw new Error('Customer document not found');
             if (!loanSnap.exists()) throw new Error('Loan not found');
 
+            const userData = userSnap.data();
             const loan = loanSnap.data();
+
+            // Guard: do not process payment on a closed loan
+            const loanStatus = (loan.status || '').toLowerCase();
+            if (loanStatus === 'closed' || loanStatus === 'completed' || loanStatus === 'paid') {
+                throw new Error('This loan is already fully repaid');
+            }
 
             if (!userData.accounts || userData.accounts.length === 0) {
                 throw new Error('Customer has no valid accounts');
@@ -291,7 +281,7 @@ export const repayEMI = async (customerEmail, loanId) => {
             }
 
             account.currentBalance = currentBal - emiAmount;
-            account.availableBalance = (parseFloat(account.availableBalance) || 0) - emiAmount;
+            account.availableBalance = Math.max(0, (parseFloat(account.availableBalance) || 0) - emiAmount);
 
             const paidEMIs = (loan.paidEMIs || 0) + 1;
             const loanTerm = loan.loanTerm || 12;
@@ -358,11 +348,9 @@ export const repayEMI = async (customerEmail, loanId) => {
                 lastUpdated: serverTimestamp()
             });
 
-            console.log("✅ EMI repayment successful. EMIs paid:", paidEMIs);
             return { success: true };
         });
     } catch (err) {
-        console.error("❌ EMI repayment error:", err);
         return { success: false, error: err.message };
     }
 };
@@ -372,7 +360,6 @@ export const getCustomerLoans = async (customerEmail) => {
         const customerInfo = await findCustomerByEmail(customerEmail);
         return { success: true, data: customerInfo.data };
     } catch (err) {
-        console.error("❌ Error fetching loans:", err);
         return { success: false, error: err.message };
     }
 };

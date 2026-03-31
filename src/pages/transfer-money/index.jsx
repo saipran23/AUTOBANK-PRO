@@ -175,6 +175,13 @@ const TransferMoney = () => {
         setError(null);
     };
 
+    const handleCancel = () => {
+        setTransactionType(null);
+        setCurrentStep(1);
+        setError(null);
+        setTransactionProcessed(false);
+    };
+
     const handleConfirmTransaction = async () => {
         if (isProcessing || transactionProcessed) {
             return;
@@ -556,8 +563,8 @@ const TransferMoney = () => {
                                 formData={formData}
                                 accounts={accounts}
                                 onConfirm={handleConfirmTransaction}
-                                onEdit={handleEditTransaction}
                                 onBack={handleGoBack}
+                                onCancel={handleCancel}
                                 isProcessing={isProcessing || transactionProcessed}
                             />
                         )}

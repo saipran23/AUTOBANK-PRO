@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useUser } from '../../context/UserContext.jsx';
+import { useAuth } from "../../contexts/AuthContext";
 
 const LoanDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user } = useUser();  // assumes UserContext provides user with uid
+    const { user } = useAuth();
     const [loan, setLoan] = useState(null);
     const [loading, setLoading] = useState(true);
 

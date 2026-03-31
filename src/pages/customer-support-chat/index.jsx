@@ -70,6 +70,105 @@ const triageSequence = [
     }
 ];
 
+// ============================================================================
+// BOT FAQ AUTO-RESPONSES (keyword → helpful answer)
+// ============================================================================
+const bankingFAQ = {
+    "Account Issue": {
+        answer: `Here are quick self-service options for account issues:
+• **Check balance**: Visit Dashboard → My Accounts
+• **Locked account**: Wait 30 mins after multiple failed login attempts, or reset your password
+• **Update contact info**: Profile Settings → Edit Details
+• **Lost card**: Contact us immediately — an agent will help you block and reissue it
+
+If none of these resolve your issue, an agent will be with you shortly! 🔔`,
+    },
+    "Card Problem": {
+        answer: `For card problems, here's what you can do right now:
+• **Block a lost/stolen card**: Settings → Cards → Block Card
+• **Card not working**: Check if it's expired or if international use is enabled
+• **PIN reset**: ATM → Forgot PIN, or Settings → Cards → Reset PIN
+• **Dispute a transaction**: Transactions → Select transaction → "Raise Dispute"
+
+An agent will follow up with you for anything requiring manual intervention. 🔒`,
+    },
+    "Loan Question": {
+        answer: `Here's a quick overview of our loan services:
+• **Apply for a loan**: Dashboard → Apply Loan (Personal, Home, Car, Education, Business)
+• **Check loan status**: Dashboard → My Loans
+• **Repay EMI**: Transfer & Repayment → Repay Loan
+• **Interest rates**: Personal 12% | Home 8.5% | Car 9.5% | Education 7.5% | Business 11%
+• **Loan eligibility**: Minimum credit score 650; income verification required
+
+An agent can help with custom loan queries. 📋`,
+    },
+    "Transaction Dispute": {
+        answer: `For transaction disputes, please note:
+• **Check transaction history**: Dashboard → Account Details → Transactions
+• **UTR/Reference number**: Save this from your transaction confirmation screen
+• **Dispute window**: Disputes must be raised within 30 days of the transaction
+• **Fraudulent transactions**: These are treated as Critical — an agent is being notified
+
+Please share the UTR number with the agent when they connect. ⚠️`,
+    },
+    "Technical Support": {
+        answer: `For technical issues:
+• **Can't login**: Reset password via "Forgot Password" on the Login page
+• **Page not loading**: Clear browser cache (Ctrl + Shift + Delete) and retry
+• **OTP not received**: Check spam folder; retry after 2 minutes
+• **App error**: Take a screenshot and share it — our agent will help diagnose
+
+We're escalating this to a technical specialist. 🛠️`,
+    },
+    "General Inquiry": {
+        answer: `Welcome to AutoBank Support! Here are some common resources:
+• **Account Opening**: Register at autobank.com/signup
+• **Banking Hours**: 24/7 for online banking; 9AM–6PM for branch visits
+• **Customer Helpline**: 1800-XXX-XXXX (toll free)
+• **Locate a Branch**: Dashboard → Help → Find a Branch
+• **IFSC Code**: UTIB0000001 (Main Branch)
+
+Feel free to ask anything — an agent will connect shortly! 😊`,
+    },
+};
+
+// Match inquiry type to FAQ entry
+const getBotFAQResponse = (triageData) => {
+    const inquiry = triageData?.inquiry_type || "";
+    const entry = bankingFAQ[inquiry];
+    return entry?.answer || null;
+};
+
+// Simple keyword-based auto-reply for free-text messages after triage
+const getKeywordReply = (messageText) => {
+    const msg = messageText.toLowerCase();
+    if (msg.includes("balance") || msg.includes("how much")) {
+        return "You can check your live balance on the **Dashboard → My Accounts** page. It updates in real time after every transaction.";
+    }
+    if (msg.includes("transfer") || msg.includes("send money")) {
+        return "To transfer money: Dashboard → Transfer Money. You'll need the recipient's 13-digit account number and IFSC code. Daily limit is ₹5,00,000.";
+    }
+    if (msg.includes("emi") || msg.includes("loan repay") || msg.includes("repayment")) {
+        return "To repay an EMI: Dashboard → Transfer & Repayment → Repay Loan. Select your loan and the EMI amount will be pre-filled.";
+    }
+    if (msg.includes("ifsc")) {
+        return "AutoBank IFSC code: **UTIB0000001** (Main Branch). You can find account-specific details in Profile Settings.";
+    }
+    if (msg.includes("statement") || msg.includes("history")) {
+        return "Transaction history is available in Dashboard → Account Details. You can filter by date and download as PDF (coming soon).";
+    }
+    if (msg.includes("block card") || msg.includes("lost card") || msg.includes("stolen")) {
+        return "⚠️ For a lost/stolen card, please contact our 24/7 helpline immediately: **1800-XXX-XXXX**. An agent here will also escalate this right away.";
+    }
+    if (msg.includes("interest rate") || msg.includes("rate")) {
+        return "Current loan interest rates: Personal 12% | Home 8.5% | Car 9.5% | Education 7.5% | Business 11% (p.a.). Subject to credit score adjustments.";
+    }
+    if (msg.includes("apply loan") || msg.includes("new loan")) {
+        return "To apply for a loan: Dashboard → Apply Loan. Choose from Personal, Home, Car, Education, or Business loan. Approval typically takes 1–3 business days.";
+    }
+    return null;
+};
+
 // Priority mapping from urgency
 const getPriorityFromUrgency = (urgency) => {
     if (urgency?.includes("Critical")) return "critical";
@@ -371,6 +470,20 @@ const CustomerSupportChat = () => {
             setChatStatus("waiting-assignment");
             setSuggestedResponses([]);
             setWaitTime("2-5 minutes");
+
+            // Send instant FAQ auto-response based on inquiry type
+            const faqReply = getBotFAQResponse(triageData);
+            if (faqReply) {
+                await sendMessage(
+                    currentChatId,
+                    "system-bot",
+                    "AutoBank Assistant",
+                    `While you wait, here's some information that may help with your ${triageData.inquiry_type || "inquiry"}:\n\n${faqReply}`,
+                    true,
+                    false
+                );
+            }
+
             setIsTyping(false);
 
         } catch (err) {
@@ -401,7 +514,7 @@ const CustomerSupportChat = () => {
             if (!triageComplete && triageStep < triageSequence.length) {
                 await handleTriageResponse(messageText);
             } else {
-                // After triage, just send regular message
+                // After triage, send regular message
                 await sendMessage(
                     chatId,
                     user.uid,
@@ -412,6 +525,25 @@ const CustomerSupportChat = () => {
                 );
 
                 setSuggestedResponses([]);
+
+                // Auto-reply for common banking keywords while waiting for agent
+                const autoReply = getKeywordReply(messageText);
+                if (autoReply && chatStatus !== "assigned") {
+                    setTimeout(async () => {
+                        try {
+                            await sendMessage(
+                                chatId,
+                                "system-bot",
+                                "AutoBank Assistant",
+                                autoReply,
+                                true,
+                                false
+                            );
+                        } catch {
+                            // Non-critical; ignore if auto-reply fails
+                        }
+                    }, 800);
+                }
             }
 
         } catch (err) {

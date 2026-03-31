@@ -209,10 +209,10 @@ const EmployeeDashboard = () => {
         });
 
         return (
-            <div className="p-6 bg-white border-2 border-black shadow-[4px_4px_0px_#000] w-full mt-6">
+            <div className="p-6 bg-white rounded-xl shadow w-full mt-6">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-3">
                     <div>
-                        <h2 className="text-2xl font-black mb-1 text-black">
+                        <h2 className="text-2xl font-bold mb-1 text-blue-800">
                             Account Management
                         </h2>
                         <p className="text-gray-500">All bank accounts in the system</p>
@@ -220,7 +220,7 @@ const EmployeeDashboard = () => {
                     <input
                         type="text"
                         placeholder="Search accounts..."
-                        className="px-4 py-2 border-2 border-black focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] w-64"
+                        className="px-4 py-2 border rounded-lg focus:outline-none w-64 shadow-sm"
                         value={accountSearch}
                         onChange={(e) => setAccountSearch(e.target.value)}
                     />
@@ -237,7 +237,7 @@ const EmployeeDashboard = () => {
                                 key={
                                     (a.accountNumber || a.number || idx) + "-" + idx
                                 }
-                                className="border-2 border-black p-4 cursor-pointer hover:bg-[#FFD60A] hover:shadow-[4px_4px_0px_#000] transition duration-300 bg-white shadow-[2px_2px_0px_#000]"
+                                className="border-2 border-gray-200 rounded-2xl p-4 cursor-pointer hover:border-blue-600 hover:shadow-lg transition duration-300 bg-gradient-to-br from-white to-blue-50"
                                 onClick={() => setActiveAccount(a)}
                                 style={{ minHeight: 190 }}
                             >
@@ -262,7 +262,7 @@ const EmployeeDashboard = () => {
                                     </span>
                                 </div>
                                 <hr className="my-2" />
-                                <div className="text-base font-bold text-black">
+                                <div className="text-base font-bold text-blue-600">
                                     Balance: ₹
                                     {a.currentBalance?.toLocaleString("en-IN", {
                                         minimumFractionDigits: 2,
@@ -277,10 +277,10 @@ const EmployeeDashboard = () => {
                     </div>
                 )}
                 {activeAccount && (
-                    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-8 z-50">
-                        <div className="bg-white border-2 border-black shadow-[6px_6px_0px_#000] p-8 max-w-4xl w-full max-h-[95vh] overflow-y-auto">
+                    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-8 z-50">
+                        <div className="bg-white rounded-2xl p-8 max-w-4xl w-full max-h-[95vh] overflow-y-auto shadow-xl">
                             <button
-                                className="mb-3 text-black font-bold hover:underline text-xs"
+                                className="mb-3 text-blue-700 hover:underline text-xs font-semibold"
                                 onClick={() => {
                                     setActiveAccount(null);
                                     setShowEdit(false);
@@ -296,7 +296,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">Name:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editName}
                                             onChange={(e) => setEditName(e.target.value)}
                                         />
@@ -304,7 +304,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">Phone:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editPhone}
                                             onChange={(e) => setEditPhone(e.target.value)}
                                         />
@@ -312,7 +312,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">Email:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editEmail}
                                             onChange={(e) => setEditEmail(e.target.value)}
                                         />
@@ -320,7 +320,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">DOB:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editDob}
                                             onChange={(e) => setEditDob(e.target.value)}
                                         />
@@ -328,7 +328,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">Gender:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editGender}
                                             onChange={(e) => setEditGender(e.target.value)}
                                         />
@@ -336,7 +336,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">Aadhar#:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editAadhar}
                                             onChange={(e) => setEditAadhar(e.target.value)}
                                         />
@@ -344,7 +344,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">PAN#:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editPan}
                                             onChange={(e) => setEditPan(e.target.value)}
                                         />
@@ -352,7 +352,7 @@ const EmployeeDashboard = () => {
                                     <div>
                                         <label className="block font-semibold mb-1">Address:</label>
                                         <input
-                                            className="border-2 border-black px-2 py-1 w-full focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A]"
+                                            className="border rounded px-2 py-1 w-full"
                                             value={editAddress}
                                             onChange={(e) => setEditAddress(e.target.value)}
                                         />
@@ -368,20 +368,20 @@ const EmployeeDashboard = () => {
                                             <img
                                                 src={editPhotoUrl}
                                                 alt="Account"
-                                                className="mt-2 w-28 h-28 object-cover border-2 border-black"
+                                                className="mt-2 w-28 h-28 object-cover rounded"
                                             />
                                         )}
                                     </div>
                                     <div className="md:col-span-2 flex gap-4 mt-4">
                                         <button
                                             type="submit"
-                                            className="bg-[#FFD60A] text-black border-2 border-black px-6 py-2 font-black shadow-[2px_2px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 transition"
+                                            className="bg-blue-600 text-white rounded px-6 py-2 font-bold hover:bg-blue-700 transition"
                                         >
                                             Save
                                         </button>
                                         <button
                                             type="button"
-                                            className="bg-white text-black border-2 border-black px-6 py-2 font-bold hover:bg-[#FFD60A] transition"
+                                            className="bg-gray-400 text-white rounded px-6 py-2 font-bold hover:bg-gray-500 transition"
                                             onClick={() => setShowEdit(false)}
                                         >
                                             Cancel
@@ -394,10 +394,10 @@ const EmployeeDashboard = () => {
                                         <img
                                             src={editPhotoUrl}
                                             alt="Profile"
-                                            className="mb-5 w-32 h-32 object-cover border-4 border-black mx-auto"
+                                            className="mb-5 w-32 h-32 object-cover rounded-full border-4 border-blue-200 mx-auto"
                                         />
                                     )}
-                                    <div className="font-black text-2xl mb-2 text-black text-center">
+                                    <div className="font-bold text-2xl mb-2 text-blue-950 text-center">
                                         {activeAccount.customer.personalDetails?.fullName ||
                                             activeAccount.customer.name ||
                                             "Unknown"}
@@ -437,7 +437,7 @@ const EmployeeDashboard = () => {
                                         <div>
                                             <b>Opened:</b> {activeAccount.openedDate ? formatDate(activeAccount.openedDate) : "-"}
                                         </div>
-                                        <div className="text-black font-bold">
+                                        <div className="text-blue-600 font-bold">
                                             <b>Current Balance:</b> ₹
                                             {activeAccount.currentBalance?.toLocaleString("en-IN", {
                                                 minimumFractionDigits: 2,
@@ -454,13 +454,13 @@ const EmployeeDashboard = () => {
                                     </div>
                                     <hr className="my-3" />
                                     <button
-                                        className="mt-6 w-full bg-[#FFD60A] border-2 border-black text-black py-2 font-black text-lg shadow-[2px_2px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 transition"
+                                        className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded font-bold text-lg transition"
                                         onClick={() => setShowEdit(true)}
                                     >
                                         Edit Account
                                     </button>
                                     <button
-                                        className="mt-3 w-full bg-white border-2 border-black text-black py-2 font-bold text-lg hover:bg-[#FFD60A] transition"
+                                        className="mt-3 w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 rounded font-bold text-lg transition"
                                         onClick={() => setActiveAccount(null)}
                                     >
                                         Close
@@ -479,8 +479,8 @@ const EmployeeDashboard = () => {
         const [selectedTx, setSelectedTx] = useState(null);
 
         return (
-            <div className="p-6 bg-white border-2 border-black shadow-[4px_4px_0px_#000] w-full mt-6">
-                <h2 className="text-2xl font-black mb-3 text-black">
+            <div className="p-6 bg-white rounded-xl shadow w-full mt-6">
+                <h2 className="text-2xl font-bold mb-3 text-blue-800">
                     Transaction Monitor
                 </h2>
                 <p className="text-gray-500 mb-4">Recent transaction activity</p>
@@ -489,31 +489,31 @@ const EmployeeDashboard = () => {
                         No recent transactions
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full text-sm bg-white border-2 border-black">
+                    <div className="overflow-x-auto rounded-xl">
+                        <table className="min-w-full text-sm bg-white border rounded-xl shadow">
                             <thead>
-                            <tr className="bg-[#FFFEF0] text-black">
-                                <th className="py-2 px-3 text-left font-black border-b-2 border-black">Txn ID</th>
-                                <th className="py-2 px-3 text-left font-black border-b-2 border-black">Description</th>
-                                <th className="py-2 px-3 text-left font-black border-b-2 border-black">Amount</th>
-                                <th className="py-2 px-3 text-left font-black border-b-2 border-black">Type</th>
-                                <th className="py-2 px-3 text-left font-black border-b-2 border-black">Date</th>
-                                <th className="py-2 px-3 text-left font-black border-b-2 border-black">Time</th>
+                            <tr className="bg-blue-100 text-blue-900">
+                                <th className="py-2 px-3 text-left">Txn ID</th>
+                                <th className="py-2 px-3 text-left">Description</th>
+                                <th className="py-2 px-3 text-left">Amount</th>
+                                <th className="py-2 px-3 text-left">Type</th>
+                                <th className="py-2 px-3 text-left">Date</th>
+                                <th className="py-2 px-3 text-left">Time</th>
                             </tr>
                             </thead>
                             <tbody>
                             {transactions.map((t, idx) => (
                                 <tr
                                     key={t.id || idx}
-                                    className="border-b border-black hover:bg-[#FFD60A] cursor-pointer transition"
+                                    className="border-b hover:bg-blue-50 cursor-pointer transition"
                                     onClick={() => setSelectedTx(t)}
                                 >
                                     <td className="py-2 px-3 font-mono text-xs">{(t.id || "").substring(0, 8)}...</td>
                                     <td className="py-2 px-3 text-sm">{t.description || "-"}</td>
                                     <td className="py-2 px-3 font-semibold">₹{t.amount?.toLocaleString("en-IN")}</td>
                                     <td className="py-2 px-3">
-                                            <span className={`px-2 py-1 border text-xs font-bold ${
-                                                t.type === 'debit' ? 'bg-[#FF6B6B]/20 border-[#FF6B6B] text-black' : 'bg-[#00C9B1]/20 border-[#00C9B1] text-black'
+                                            <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                                                t.type === 'debit' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
                                             }`}>
                                                 {t.type}
                                             </span>
@@ -527,9 +527,9 @@ const EmployeeDashboard = () => {
                     </div>
                 ))}
                 {selectedTx && (
-                    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-40">
-                        <div className="bg-white border-2 border-black shadow-[6px_6px_0px_#000] p-8 max-w-lg w-full">
-                            <h3 className="text-xl font-black mb-4 text-black">
+                    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-40">
+                        <div className="bg-white p-8 rounded-2xl max-w-lg w-full shadow-2xl">
+                            <h3 className="text-xl font-bold mb-4 text-blue-900">
                                 Transaction Details
                             </h3>
                             <div className="space-y-3">
@@ -556,7 +556,7 @@ const EmployeeDashboard = () => {
                                 </div>
                             </div>
                             <button
-                                className="mt-6 w-full px-4 py-2 bg-[#FFD60A] border-2 border-black text-black font-black shadow-[2px_2px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 transition"
+                                className="mt-6 w-full px-4 py-2 bg-blue-700 text-white rounded shadow font-semibold hover:bg-blue-800 transition"
                                 onClick={() => setSelectedTx(null)}
                             >
                                 Close
@@ -570,19 +570,19 @@ const EmployeeDashboard = () => {
 
     // USERS TAB SECTION
     const UserList = () => (
-        <div className="p-6 bg-white border-2 border-black shadow-[4px_4px_0px_#000] w-full mt-6">
+        <div className="p-6 bg-white rounded-xl shadow w-full mt-6">
             <div className="flex flex-wrap gap-6 mb-6">
-                <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] p-5 border-l-4 border-black min-w-[180px] flex-1">
+                <div className="bg-white rounded-xl shadow-md p-5 border-l-4 border-blue-500 min-w-[180px] flex-1">
                     <span className="text-gray-600 text-sm">Total Users</span>
                     <div className="text-3xl font-bold">{totalUsers}</div>
                     <div className="text-gray-500 mt-1 text-xs">Registered customers</div>
                 </div>
-                <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] p-5 border-l-4 border-black min-w-[180px] flex-1">
+                <div className="bg-white rounded-xl shadow-md p-5 border-l-4 border-green-500 min-w-[180px] flex-1">
                     <span className="text-gray-600 text-sm">Total Accounts</span>
                     <div className="text-3xl font-bold">{totalAccounts}</div>
                     <div className="text-gray-500 mt-1 text-xs">Active bank accounts</div>
                 </div>
-                <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] p-5 border-l-4 border-black min-w-[220px] flex-1">
+                <div className="bg-white rounded-xl shadow-md p-5 border-l-4 border-purple-500 min-w-[220px] flex-1">
                     <span className="text-gray-600 text-sm">Total Balance</span>
                     <div className="text-3xl font-bold overflow-x-auto">
                         ₹{totalBalance.toLocaleString("en-IN", {
@@ -592,17 +592,17 @@ const EmployeeDashboard = () => {
                     </div>
                     <div className="text-gray-500 mt-1 text-xs">System-wide balance</div>
                 </div>
-                <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] p-5 border-l-4 border-black min-w-[180px] flex-1">
+                <div className="bg-white rounded-xl shadow-md p-5 border-l-4 border-orange-500 min-w-[180px] flex-1">
                     <span className="text-gray-600 text-sm">Transactions</span>
                     <div className="text-3xl font-bold">{totalTransactions}</div>
                     <div className="text-gray-500 mt-1 text-xs">Recent transactions</div>
                 </div>
             </div>
 
-            <h2 className="text-2xl font-black text-black mb-3">User Management</h2>
+            <h2 className="text-2xl font-bold text-blue-800 mb-3">User Management</h2>
             <p className="mb-3 text-gray-500">Overview of all registered users</p>
 
-            <div className="flex font-black text-lg text-black border-b-2 border-black pb-2 mb-2">
+            <div className="flex font-semibold text-lg text-gray-700 border-b pb-2 mb-2">
                 <div className="flex-1">Name</div>
                 <div className="flex-1">Email</div>
                 <div className="flex-1">Phone Number</div>
@@ -615,7 +615,7 @@ const EmployeeDashboard = () => {
                 customers.map((u) => (
                     <div
                         key={u.id}
-                        className="flex flex-row items-center border-2 border-black p-4 mb-3 hover:bg-[#FFD60A] cursor-default transition"
+                        className="flex flex-row items-center border rounded-xl p-4 mb-3 hover:bg-blue-50 cursor-default transition"
                     >
                         <div className="flex-1 text-lg font-semibold text-gray-900 min-w-0 truncate">
                             {u.personalDetails?.fullName || u.name || "Unknown User"}
@@ -636,8 +636,8 @@ const EmployeeDashboard = () => {
 
     // AUDIT LOGS TAB
     const AuditLogsTab = () => (
-        <div className="p-6 bg-white border-2 border-black shadow-[4px_4px_0px_#000] w-full mt-6">
-            <h2 className="text-2xl font-black mb-3 text-black">Audit Trail</h2>
+        <div className="p-6 bg-white rounded-xl shadow w-full mt-6">
+            <h2 className="text-2xl font-bold mb-3 text-blue-800">Audit Trail</h2>
             <p className="text-gray-500">System activity logs</p>
             <div className="mt-6 p-6 text-center text-gray-400">
                 No audit logs available
@@ -665,9 +665,9 @@ const EmployeeDashboard = () => {
 
     if (authLoading) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-[#FFFEF0]">
+            <div className="flex items-center justify-center min-h-screen bg-blue-50">
                 <div className="text-center">
-                    <div className="animate-spin h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
                     <p className="text-gray-600 font-semibold">Loading...</p>
                 </div>
             </div>
@@ -675,51 +675,51 @@ const EmployeeDashboard = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#FFFEF0]">
+        <div className="min-h-screen bg-blue-50">
             {/* Header */}
-            <header className="fixed top-0 left-0 w-full z-50 bg-white border-b-2 border-black shadow-[0_4px_0_#000] px-6 py-4 flex items-center gap-4">
+            <header className="fixed top-0 left-0 w-full z-50 bg-white shadow px-6 py-4 flex items-center gap-4 rounded-b-xl">
                 <div className="flex items-center gap-3 pr-8">
-                    <span className="text-3xl font-black text-black">
+                    <span className="text-3xl font-extrabold text-blue-800">
                         AutoBank-Pro
                     </span>
                     <span className="text-gray-500 text-lg">Admin Portal</span>
                 </div>
                 <nav className="flex space-x-2 text-sm font-semibold text-gray-600">
                     <button
-                        className={`py-2 px-3 transition ${
+                        className={`py-2 px-3 rounded-t-lg transition ${
                             activeTab === "users"
-                                ? "bg-[#FFD60A] border-2 border-black font-black text-black"
-                                : "bg-white border-2 border-black font-bold hover:bg-[#FFD60A]"
+                                ? "bg-blue-50 border border-b-0 border-gray-200 text-gray-900"
+                                : "hover:text-gray-800"
                         }`}
                         onClick={() => setActiveTab("users")}
                     >
                         Users
                     </button>
                     <button
-                        className={`py-2 px-3 transition ${
+                        className={`py-2 px-3 rounded-t-lg transition ${
                             activeTab === "accounts"
-                                ? "bg-[#FFD60A] border-2 border-black font-black text-black"
-                                : "bg-white border-2 border-black font-bold hover:bg-[#FFD60A]"
+                                ? "bg-blue-50 border border-b-0 border-gray-200 text-gray-900"
+                                : "hover:text-gray-800"
                         }`}
                         onClick={() => setActiveTab("accounts")}
                     >
                         Accounts
                     </button>
                     <button
-                        className={`py-2 px-3 transition ${
+                        className={`py-2 px-3 rounded-t-lg transition ${
                             activeTab === "transactions"
-                                ? "bg-[#FFD60A] border-2 border-black font-black text-black"
-                                : "bg-white border-2 border-black font-bold hover:bg-[#FFD60A]"
+                                ? "bg-blue-50 border border-b-0 border-gray-200 text-gray-900"
+                                : "hover:text-gray-800"
                         }`}
                         onClick={() => setActiveTab("transactions")}
                     >
                         Transactions
                     </button>
                     <button
-                        className={`py-2 px-3 transition ${
+                        className={`py-2 px-3 rounded-t-lg transition ${
                             activeTab === "loans"
-                                ? "bg-[#FFD60A] border-2 border-black font-black text-black"
-                                : "bg-white border-2 border-black font-bold hover:bg-[#FFD60A]"
+                                ? "bg-blue-50 border border-b-0 border-gray-200 text-gray-900"
+                                : "hover:text-gray-800"
                         }`}
                         onClick={() => setActiveTab("loans")}
                     >
@@ -729,13 +729,13 @@ const EmployeeDashboard = () => {
 
                 {/* Chat Support Button */}
                 <button
-                    className="ml-auto mr-3 bg-white border-2 border-black text-black font-bold px-4 py-2 shadow-[2px_2px_0px_#000] hover:bg-[#FFD60A] transition flex items-center gap-2 relative"
+                    className="ml-auto mr-3 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded shadow transition flex items-center gap-2 relative"
                     onClick={() => navigate("/employee/chat")}
                     title="Go to Chat Support Portal"
                 >
                     <span className="text-lg">💬 Chat Support</span>
                     {unreadChats > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-[#FF6B6B] border border-black text-black text-xs w-6 h-6 flex items-center justify-center font-bold">
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold">
                             {unreadChats}
                         </span>
                     )}
@@ -743,7 +743,7 @@ const EmployeeDashboard = () => {
 
                 {/* Logout Button */}
                 <button
-                    className="bg-[#FF6B6B] border-2 border-black text-black font-bold px-4 py-2 shadow-[2px_2px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 transition"
+                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow transition font-semibold"
                     onClick={handleLogout}
                     title="Sign out"
                 >
@@ -752,7 +752,7 @@ const EmployeeDashboard = () => {
 
                 {/* User Profile */}
                 <div className="flex items-center gap-2 ml-4">
-                    <div className="w-8 h-8 bg-[#FFD60A] border-2 border-black flex items-center justify-center text-black font-bold">
+                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                         {user?.displayName?.charAt(0) || user?.email?.charAt(0) || "U"}
                     </div>
                     <span className="text-gray-700 text-sm hidden sm:block">

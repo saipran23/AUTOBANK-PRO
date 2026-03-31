@@ -127,11 +127,11 @@ const ExpenseInsights = ({ transactions = [] }) => {
     return (
         <div className="space-y-6">
             {/* Header Card */}
-            <div className="bg-[#FFD60A] border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
+            <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-6 banking-shadow-md">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
                         <Icon name="TrendingDown" size={24} color="var(--color-primary)" />
-                        <h2 className="text-2xl font-black text-black">Expense Insights</h2>
+                        <h2 className="text-2xl font-bold text-foreground">Expense Insights</h2>
                     </div>
                     <div className="flex gap-2">
                         <Button
@@ -160,24 +160,24 @@ const ExpenseInsights = ({ transactions = [] }) => {
 
                 {/* Summary Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="bg-white border-2 border-black p-4 shadow-[2px_2px_0px_#000]">
-                        <p className="text-sm font-bold text-gray-700 mb-1">Total Expenses</p>
-                        <p className="text-2xl font-black text-black">{formatCurrency(totalExpenses)}</p>
+                    <div className="bg-card/50 rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Total Expenses</p>
+                        <p className="text-2xl font-bold text-foreground">{formatCurrency(totalExpenses)}</p>
                         <p className="text-xs text-success mt-1">📊 Tracked this month</p>
                     </div>
-                    <div className="bg-white border-2 border-black p-4 shadow-[2px_2px_0px_#000]">
-                        <p className="text-sm font-bold text-gray-700 mb-1">Daily Average</p>
-                        <p className="text-2xl font-black text-black">{formatCurrency(averageDaily)}</p>
+                    <div className="bg-card/50 rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Daily Average</p>
+                        <p className="text-2xl font-bold text-foreground">{formatCurrency(averageDaily)}</p>
                         <p className="text-xs text-muted-foreground mt-1">📅 Per day</p>
                     </div>
-                    <div className="bg-white border-2 border-black p-4 shadow-[2px_2px_0px_#000]">
-                        <p className="text-sm font-bold text-gray-700 mb-1">Transactions</p>
-                        <p className="text-2xl font-black text-black">{transactionData.filter(t => t.type === 'debit').length}</p>
+                    <div className="bg-card/50 rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Transactions</p>
+                        <p className="text-2xl font-bold text-foreground">{transactionData.filter(t => t.type === 'debit').length}</p>
                         <p className="text-xs text-muted-foreground mt-1">💳 Total count</p>
                     </div>
-                    <div className="bg-white border-2 border-black p-4 shadow-[2px_2px_0px_#000]">
-                        <p className="text-sm font-bold text-gray-700 mb-1">Top Category</p>
-                        <p className="text-2xl font-black text-black">{topCategoryPercentage}%</p>
+                    <div className="bg-card/50 rounded-lg p-4">
+                        <p className="text-sm text-muted-foreground mb-1">Top Category</p>
+                        <p className="text-2xl font-bold text-foreground">{topCategoryPercentage}%</p>
                         <p className="text-xs text-muted-foreground mt-1">{topCategory?.category}</p>
                     </div>
                 </div>
@@ -186,8 +186,8 @@ const ExpenseInsights = ({ transactions = [] }) => {
             {/* Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Expense by Category - Pie Chart */}
-                <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
-                    <h3 className="text-lg font-black text-black mb-6">Spending by Category</h3>
+                <div className="bg-card border border-border rounded-lg p-6 banking-shadow-md">
+                    <h3 className="text-lg font-semibold text-foreground mb-6">Spending by Category</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <PieChart>
                             <Pie
@@ -221,8 +221,8 @@ const ExpenseInsights = ({ transactions = [] }) => {
                 </div>
 
                 {/* Daily Spending Trend - Line Chart */}
-                <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
-                    <h3 className="text-lg font-black text-black mb-6">Daily Spending Trend</h3>
+                <div className="bg-card border border-border rounded-lg p-6 banking-shadow-md">
+                    <h3 className="text-lg font-semibold text-foreground mb-6">Daily Spending Trend</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={dailySpending}>
                             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
@@ -254,8 +254,8 @@ const ExpenseInsights = ({ transactions = [] }) => {
             </div>
 
             {/* Category Breakdown - Bar Chart */}
-            <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
-                <h3 className="text-lg font-black text-black mb-6">Category Breakdown</h3>
+            <div className="bg-card border border-border rounded-lg p-6 banking-shadow-md">
+                <h3 className="text-lg font-semibold text-foreground mb-6">Category Breakdown</h3>
                 <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={expensesByCategory}>
                         <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
@@ -282,24 +282,24 @@ const ExpenseInsights = ({ transactions = [] }) => {
             </div>
 
             {/* Category Details List */}
-            <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
-                <h3 className="text-lg font-black text-black mb-6">Category Details</h3>
+            <div className="bg-card border border-border rounded-lg p-6 banking-shadow-md">
+                <h3 className="text-lg font-semibold text-foreground mb-6">Category Details</h3>
                 <div className="space-y-3">
                     {expensesByCategory.map((item, index) => (
                         <div
                             key={item.category}
-                            className="flex items-center justify-between p-4 bg-[#FFFEF0] border border-black hover:bg-[#FFD60A] transition-all cursor-pointer"
+                            className="flex items-center justify-between p-4 bg-muted/30 rounded-lg hover:bg-muted/50 banking-transition cursor-pointer"
                             onClick={() => setSelectedCategory(selectedCategory === item.category ? null : item.category)}
                         >
                             <div className="flex items-center space-x-3 flex-1">
                                 <div
-                                    className="w-3 h-3"
+                                    className="w-3 h-3 rounded-full"
                                     style={{ backgroundColor: getCategoryColor(index) }}
                                 ></div>
                                 <div className="flex items-center space-x-2">
                                     <Icon name={getCategoryIcon(item.category)} size={18} />
                                     <div>
-                                        <p className="font-bold text-black">{item.category}</p>
+                                        <p className="font-medium text-foreground">{item.category}</p>
                                         <p className="text-xs text-muted-foreground">{item.count} transactions</p>
                                     </div>
                                 </div>
@@ -317,9 +317,9 @@ const ExpenseInsights = ({ transactions = [] }) => {
 
             {/* Detailed Transactions for Selected Category */}
             {selectedCategory && (
-                <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
+                <div className="bg-card border border-border rounded-lg p-6 banking-shadow-md">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-lg font-black text-black">
+                        <h3 className="text-lg font-semibold text-foreground">
                             {selectedCategory} Transactions ({filteredTransactions.length})
                         </h3>
                         <Button
@@ -349,7 +349,7 @@ const ExpenseInsights = ({ transactions = [] }) => {
             )}
 
             {/* Insights & Recommendations */}
-            <div className="bg-[#00C9B1]/10 border-2 border-[#00C9B1] p-6">
+            <div className="bg-success/10 border border-success/20 rounded-lg p-6">
                 <div className="flex items-start space-x-3">
                     <Icon name="Lightbulb" size={20} color="var(--color-success)" />
                     <div>

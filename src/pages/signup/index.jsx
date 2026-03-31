@@ -180,13 +180,13 @@ export default function Signup() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FFFEF0] py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
                 {/* Card Container */}
-                <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] p-8 md:p-12">
+                <div className="bg-white shadow-2xl rounded-2xl p-8 md:p-12">
                     {/* Header */}
                     <div className="mb-10">
-                        <h2 className="text-4xl font-black text-black text-center mb-3">
+                        <h2 className="text-4xl font-bold text-gray-900 text-center mb-3">
                             Complete KYC Process
                         </h2>
                         <p className="text-center text-gray-600 font-medium">
@@ -197,7 +197,7 @@ export default function Signup() {
                             <button
                                 type="button"
                                 onClick={() => navigate('/login')}
-                                className="font-bold text-black hover:underline transition"
+                                className="font-semibold text-blue-600 hover:text-blue-700 transition"
                             >
                                 Sign in here
                             </button>
@@ -210,20 +210,18 @@ export default function Signup() {
                             {[1, 2, 3].map((num) => (
                                 <div key={num} className="flex items-center flex-1">
                                     <div
-                                        className={`w-12 h-12 flex items-center justify-center font-bold text-lg transition-all ${
-                                            step > num
-                                                ? 'bg-black text-white border-2 border-black'
-                                                : step === num
-                                                ? 'bg-[#FFD60A] border-2 border-black font-black text-black'
-                                                : 'bg-white border-2 border-black text-gray-500'
+                                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all transform ${
+                                            step >= num
+                                                ? 'bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg scale-110'
+                                                : 'bg-gray-200 text-gray-600'
                                         }`}
                                     >
                                         {num}
                                     </div>
                                     {num < 3 && (
                                         <div
-                                            className={`flex-1 h-2 mx-2 transition-all ${
-                                                step > num ? 'bg-black' : 'bg-gray-300'
+                                            className={`flex-1 h-2 mx-2 rounded-full transition-all ${
+                                                step > num ? 'bg-gradient-to-r from-blue-600 to-blue-500' : 'bg-gray-300'
                                             }`}
                                         />
                                     )}
@@ -234,8 +232,8 @@ export default function Signup() {
 
                     {/* General Error */}
                     {errors.general && (
-                        <div className="mb-6 p-4 bg-[#FF6B6B]/10 border-2 border-[#FF6B6B]">
-                            <p className="text-black font-bold">⚠️ {errors.general}</p>
+                        <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-600 rounded">
+                            <p className="text-red-700 font-medium">⚠️ {errors.general}</p>
                         </div>
                     )}
 
@@ -244,8 +242,8 @@ export default function Signup() {
                         {step === 1 && (
                             <div className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Full Name <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Full Name <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -253,24 +251,24 @@ export default function Signup() {
                                         value={formData.fullName}
                                         onChange={handleInputChange}
                                         placeholder="Enter your full name"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                            errors.fullName ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                            errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.fullName && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.fullName}</p>}
+                                    {errors.fullName && <p className="mt-2 text-sm text-red-600 font-medium">{errors.fullName}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Date of Birth <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Date of Birth <span className="text-red-600">*</span>
                                     </label>
                                     <div className="grid grid-cols-3 gap-3">
                                         <select
                                             name="dobDay"
                                             value={formData.dobDay}
                                             onChange={handleInputChange}
-                                            className={`w-full px-4 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium ${
-                                                errors.dob ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                            className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium ${
+                                                errors.dob ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                             }`}
                                         >
                                             <option value="">Day</option>
@@ -282,8 +280,8 @@ export default function Signup() {
                                             name="dobMonth"
                                             value={formData.dobMonth}
                                             onChange={handleInputChange}
-                                            className={`w-full px-4 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium ${
-                                                errors.dob ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                            className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium ${
+                                                errors.dob ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                             }`}
                                         >
                                             <option value="">Month</option>
@@ -295,8 +293,8 @@ export default function Signup() {
                                             name="dobYear"
                                             value={formData.dobYear}
                                             onChange={handleInputChange}
-                                            className={`w-full px-4 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium ${
-                                                errors.dob ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                            className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium ${
+                                                errors.dob ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                             }`}
                                         >
                                             <option value="">Year</option>
@@ -305,19 +303,19 @@ export default function Signup() {
                                             ))}
                                         </select>
                                     </div>
-                                    {errors.dob && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.dob}</p>}
+                                    {errors.dob && <p className="mt-2 text-sm text-red-600 font-medium">{errors.dob}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Gender <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Gender <span className="text-red-600">*</span>
                                     </label>
                                     <select
                                         name="gender"
                                         value={formData.gender}
                                         onChange={handleInputChange}
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium ${
-                                            errors.gender ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium ${
+                                            errors.gender ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     >
                                         <option value="">Select Gender</option>
@@ -325,12 +323,12 @@ export default function Signup() {
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    {errors.gender && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.gender}</p>}
+                                    {errors.gender && <p className="mt-2 text-sm text-red-600 font-medium">{errors.gender}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Email Address <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Email Address <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="email"
@@ -338,23 +336,23 @@ export default function Signup() {
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         placeholder="your.email@example.com"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                            errors.email ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                            errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.email && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.email}</p>}
+                                    {errors.email && <p className="mt-2 text-sm text-red-600 font-medium">{errors.email}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Phone Number <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Phone Number <span className="text-red-600">*</span>
                                     </label>
                                     <div className="flex gap-3">
                                         <select
                                             name="countryCode"
                                             value={formData.countryCode}
                                             onChange={handleInputChange}
-                                            className="w-28 px-4 py-3 border-2 border-black rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium"
+                                            className="w-28 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium"
                                         >
                                             {countryCodesOptions.map(opt => (
                                                 <option key={opt.code} value={opt.code}>
@@ -369,18 +367,18 @@ export default function Signup() {
                                             onChange={handleInputChange}
                                             placeholder="10-digit number"
                                             maxLength="10"
-                                            className={`flex-1 px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                                errors.phoneNumber ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                            className={`flex-1 px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                                errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                             }`}
                                         />
                                     </div>
-                                    {errors.phoneNumber && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.phoneNumber}</p>}
+                                    {errors.phoneNumber && <p className="mt-2 text-sm text-red-600 font-medium">{errors.phoneNumber}</p>}
                                 </div>
 
                                 <button
                                     type="button"
                                     onClick={handleNext}
-                                    className="w-full bg-[#FFD60A] text-black border-2 border-black font-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] py-3 px-6 mt-8"
+                                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-bold text-lg transition-all transform hover:scale-[1.02] active:scale-95 mt-8"
                                 >
                                     Next Step
                                 </button>
@@ -391,8 +389,8 @@ export default function Signup() {
                         {step === 2 && (
                             <div className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Street Address <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Street Address <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -400,17 +398,17 @@ export default function Signup() {
                                         value={formData.address}
                                         onChange={handleInputChange}
                                         placeholder="Enter your complete address"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                            errors.address ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                            errors.address ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.address && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.address}</p>}
+                                    {errors.address && <p className="mt-2 text-sm text-red-600 font-medium">{errors.address}</p>}
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-sm font-bold text-black mb-3">
-                                            City <span className="text-[#FF6B6B]">*</span>
+                                        <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                            City <span className="text-red-600">*</span>
                                         </label>
                                         <input
                                             type="text"
@@ -418,15 +416,15 @@ export default function Signup() {
                                             value={formData.city}
                                             onChange={handleInputChange}
                                             placeholder="City"
-                                            className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                                errors.city ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                            className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                                errors.city ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                             }`}
                                         />
-                                        {errors.city && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.city}</p>}
+                                        {errors.city && <p className="mt-2 text-sm text-red-600 font-medium">{errors.city}</p>}
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-black mb-3">
-                                            State <span className="text-[#FF6B6B]">*</span>
+                                        <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                            State <span className="text-red-600">*</span>
                                         </label>
                                         <input
                                             type="text"
@@ -434,17 +432,17 @@ export default function Signup() {
                                             value={formData.state}
                                             onChange={handleInputChange}
                                             placeholder="State"
-                                            className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                                errors.state ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                            className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                                errors.state ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                             }`}
                                         />
-                                        {errors.state && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.state}</p>}
+                                        {errors.state && <p className="mt-2 text-sm text-red-600 font-medium">{errors.state}</p>}
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Postal Code <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Postal Code <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -453,16 +451,16 @@ export default function Signup() {
                                         onChange={handleInputChange}
                                         placeholder="6-digit postal code"
                                         maxLength="6"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                            errors.pincode ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                            errors.pincode ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.pincode && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.pincode}</p>}
+                                    {errors.pincode && <p className="mt-2 text-sm text-red-600 font-medium">{errors.pincode}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        PAN Number <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        PAN Number <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -471,16 +469,16 @@ export default function Signup() {
                                         onChange={handleInputChange}
                                         placeholder="ABCDE1234F"
                                         maxLength="10"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-mono ${
-                                            errors.panNumber ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-mono ${
+                                            errors.panNumber ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.panNumber && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.panNumber}</p>}
+                                    {errors.panNumber && <p className="mt-2 text-sm text-red-600 font-medium">{errors.panNumber}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Aadhar Number <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Aadhar Number <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -489,25 +487,25 @@ export default function Signup() {
                                         onChange={handleInputChange}
                                         placeholder="12-digit Aadhar number"
                                         maxLength="12"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-mono ${
-                                            errors.aadharNumber ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-mono ${
+                                            errors.aadharNumber ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.aadharNumber && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.aadharNumber}</p>}
+                                    {errors.aadharNumber && <p className="mt-2 text-sm text-red-600 font-medium">{errors.aadharNumber}</p>}
                                 </div>
 
                                 <div className="flex gap-4 pt-6">
                                     <button
                                         type="button"
                                         onClick={handleBack}
-                                        className="flex-1 bg-white border-2 border-black font-bold text-black hover:bg-[#FFD60A] hover:shadow-[2px_2px_0px_#000] py-3 px-6"
+                                        className="flex-1 bg-gray-300 text-gray-800 py-3 px-6 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-bold transition-all transform hover:scale-[1.02] active:scale-95"
                                     >
                                         Back
                                     </button>
                                     <button
                                         type="button"
                                         onClick={handleNext}
-                                        className="flex-1 bg-[#FFD60A] text-black border-2 border-black font-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] py-3 px-6"
+                                        className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-bold transition-all transform hover:scale-[1.02] active:scale-95"
                                     >
                                         Next Step
                                     </button>
@@ -519,14 +517,14 @@ export default function Signup() {
                         {step === 3 && (
                             <div className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Account Type <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Account Type <span className="text-red-600">*</span>
                                     </label>
                                     <select
                                         name="accountType"
                                         value={formData.accountType}
                                         onChange={handleInputChange}
-                                        className="w-full px-5 py-3 border-2 border-black rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium"
+                                        className="w-full px-5 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium"
                                     >
                                         <option value="Savings">Savings Account</option>
                                         <option value="Current">Current Account</option>
@@ -534,8 +532,8 @@ export default function Signup() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Initial Deposit (₹) <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Initial Deposit (₹) <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="number"
@@ -544,13 +542,13 @@ export default function Signup() {
                                         onChange={handleInputChange}
                                         min="10000"
                                         placeholder="Minimum ₹10,000"
-                                        className="w-full px-5 py-3 border-2 border-black rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition"
+                                        className="w-full px-5 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Create Password <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Create Password <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="password"
@@ -558,16 +556,16 @@ export default function Signup() {
                                         value={formData.password}
                                         onChange={handleInputChange}
                                         placeholder="Minimum 6 characters"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                            errors.password ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                            errors.password ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.password && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.password}</p>}
+                                    {errors.password && <p className="mt-2 text-sm text-red-600 font-medium">{errors.password}</p>}
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-black mb-3">
-                                        Confirm Password <span className="text-[#FF6B6B]">*</span>
+                                    <label className="block text-sm font-semibold text-gray-800 mb-3">
+                                        Confirm Password <span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         type="password"
@@ -575,43 +573,43 @@ export default function Signup() {
                                         value={formData.confirmPassword}
                                         onChange={handleInputChange}
                                         placeholder="Re-enter your password"
-                                        className={`w-full px-5 py-3 border-2 rounded-none focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition ${
-                                            errors.confirmPassword ? 'border-[#FF6B6B] bg-[#FF6B6B]/10' : 'border-black'
+                                        className={`w-full px-5 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+                                            errors.confirmPassword ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                                         }`}
                                     />
-                                    {errors.confirmPassword && <p className="mt-2 text-sm text-[#FF6B6B] font-bold">{errors.confirmPassword}</p>}
+                                    {errors.confirmPassword && <p className="mt-2 text-sm text-red-600 font-medium">{errors.confirmPassword}</p>}
                                 </div>
 
-                                <div className="p-6 bg-[#FFFEF0] border-2 border-black">
+                                <div className="p-6 bg-blue-50 rounded-xl border-2 border-blue-200">
                                     <div className="flex items-start gap-3">
                                         <input
                                             type="checkbox"
                                             name="agreeToTerms"
                                             checked={formData.agreeToTerms}
                                             onChange={handleInputChange}
-                                            className={`h-6 w-6 mt-1 cursor-pointer accent-[#FFD60A] ${
+                                            className={`h-6 w-6 mt-1 rounded cursor-pointer accent-blue-600 ${
                                                 errors.agreeToTerms ? 'border-red-500' : ''
                                             }`}
                                         />
                                         <label className="text-sm text-gray-800 cursor-pointer">
-                                            I agree to AutoBank's <span className="font-bold text-black">terms and conditions</span>, <span className="font-bold text-black">privacy policy</span>, and consent to data processing for banking services.
+                                            I agree to AutoBank's <span className="font-semibold text-blue-600">terms and conditions</span>, <span className="font-semibold text-blue-600">privacy policy</span>, and consent to data processing for banking services.
                                         </label>
                                     </div>
-                                    {errors.agreeToTerms && <p className="mt-3 text-sm text-[#FF6B6B] font-bold">{errors.agreeToTerms}</p>}
+                                    {errors.agreeToTerms && <p className="mt-3 text-sm text-red-600 font-medium">{errors.agreeToTerms}</p>}
                                 </div>
 
                                 <div className="flex gap-4 pt-6">
                                     <button
                                         type="button"
                                         onClick={handleBack}
-                                        className="flex-1 bg-white border-2 border-black font-bold text-black hover:bg-[#FFD60A] hover:shadow-[2px_2px_0px_#000] py-3 px-6"
+                                        className="flex-1 bg-gray-300 text-gray-800 py-3 px-6 rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-bold transition-all transform hover:scale-[1.02] active:scale-95"
                                     >
                                         Back
                                     </button>
                                     <button
                                         type="submit"
                                         disabled={isLoading}
-                                        className="flex-1 bg-[#FFD60A] text-black border-2 border-black font-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] py-3 px-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-bold text-lg transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
                                     >
                                         {isLoading ? '⏳ Creating Account...' : '✓ Create Account'}
                                     </button>

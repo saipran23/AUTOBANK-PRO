@@ -29,9 +29,9 @@ export default function ProfileSettings() {
     // Loading state
     if (loading) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-[#FFFEF0]">
+            <div className="flex items-center justify-center min-h-screen bg-gray-50">
                 <div className="text-center">
-                    <div className="animate-spin h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
                     <p className="text-gray-600 font-semibold">Loading your profile...</p>
                 </div>
             </div>
@@ -41,19 +41,19 @@ export default function ProfileSettings() {
     // If no data loaded (possible if user is new, deleted, or DB is empty)
     if (!userData) {
         return (
-            <div className="min-h-screen bg-[#FFFEF0]">
+            <div className="min-h-screen bg-gray-50">
                 <Header />
                 <main className="pt-16">
                     <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
                         <div className="text-center max-w-md">
                             <div className="text-6xl mb-4">⚠️</div>
-                            <p className="text-xl font-black text-gray-900 mb-2">No user data found</p>
+                            <p className="text-xl font-semibold text-gray-900 mb-2">No user data found</p>
                             <p className="text-gray-600 mb-6">
                                 We couldn't load your profile information. Please log in again.
                             </p>
                             <button
                                 onClick={() => navigate('/login')}
-                                className="px-6 py-2 bg-[#FFD60A] border-2 border-black font-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
+                                className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
                             >
                                 Back to Login
                             </button>
@@ -76,26 +76,26 @@ export default function ProfileSettings() {
 
     if (!hasEssentialData) {
         return (
-            <div className="min-h-screen bg-[#FFFEF0]">
+            <div className="min-h-screen bg-gray-50">
                 <Header />
                 <main className="pt-16">
                     <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
                         <div className="text-center max-w-md">
                             <div className="text-6xl mb-4">⚠️</div>
-                            <p className="text-xl font-black text-gray-900 mb-2">Incomplete Profile Data</p>
+                            <p className="text-xl font-semibold text-gray-900 mb-2">Incomplete Profile Data</p>
                             <p className="text-gray-600 mb-6">
                                 Your profile is missing essential information. Please contact support or log in again.
                             </p>
                             <div className="flex gap-3 justify-center">
                                 <button
                                     onClick={() => navigate('/customer-dashboard')}
-                                    className="px-6 py-2 bg-[#FFD60A] border-2 border-black font-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
+                                    className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition"
                                 >
                                     Go to Dashboard
                                 </button>
                                 <button
                                     onClick={handleSignOut}
-                                    className="px-6 py-2 bg-[#FF6B6B] border-2 border-black font-black text-black shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
+                                    className="px-6 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition border border-red-200"
                                 >
                                     Sign Out
                                 </button>
@@ -108,15 +108,15 @@ export default function ProfileSettings() {
     }
 
     return (
-        <div className="min-h-screen bg-[#FFFEF0]">
+        <div className="min-h-screen bg-gray-50">
             <Header />
             <main className="pt-16">
                 <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col lg:flex-row gap-12">
                     {/* Sidebar */}
                     <aside className="lg:w-1/4 flex-shrink-0">
                         <div className="sticky top-24 space-y-4">
-                            <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-6 flex flex-col items-center">
-                                <div className="w-16 h-16 bg-[#FFD60A] border-2 border-black shadow-[4px_4px_0px_#000] flex items-center justify-center text-2xl font-black text-black mb-2">
+                            <div className="bg-white rounded-xl shadow border border-card-border p-6 flex flex-col items-center">
+                                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-2xl font-extrabold text-white mb-2">
                                     {personalDetails.fullName
                                         ? personalDetails.fullName.split(' ').map(s => s[0]).join('').toUpperCase().slice(0, 2)
                                         : 'U'}
@@ -125,14 +125,14 @@ export default function ProfileSettings() {
                                 <div className="text-xs text-gray-600 break-all text-center">{personalDetails.email || 'N/A'}</div>
                                 <button
                                     onClick={handleSignOut}
-                                    className="mt-5 w-full flex items-center justify-center px-4 py-2 bg-[#FF6B6B] border-2 border-black font-black text-black text-sm shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
+                                    className="mt-5 w-full flex items-center justify-center rounded-lg px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 font-semibold text-sm transition"
                                 >
                                     <Icon name="LogOut" size={16} className="mr-2" />
                                     Sign Out
                                 </button>
                                 <button
                                     onClick={() => navigate('/customer-dashboard')}
-                                    className="mt-2 w-full flex items-center justify-center px-4 py-2 bg-[#FFD60A] border-2 border-black font-black text-black text-sm shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
+                                    className="mt-2 w-full flex items-center justify-center rounded-lg px-4 py-2 bg-primary hover:bg-primary-dark text-white font-semibold text-sm transition"
                                 >
                                     <Icon name="ChevronLeft" size={16} className="mr-2" />
                                     Back to Dashboard
@@ -143,15 +143,15 @@ export default function ProfileSettings() {
                     {/* Main Content */}
                     <section className="flex-1 space-y-10">
                         <header className="mb-6">
-                            <h1 className="text-4xl font-black text-black">Profile Settings</h1>
+                            <h1 className="text-4xl font-extrabold text-gray-900">Profile Settings</h1>
                             <p className="text-lg text-gray-600">You can view your bank profile and details below</p>
                         </header>
                         <div className="grid md:grid-cols-2 gap-7">
                             {/* Personal Information */}
-                            <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-6">
+                            <div className="bg-white border border-gray-200 rounded-xl shadow p-6">
                                 <div className="flex items-center mb-4 gap-3">
                                     <Icon name="User" size={20} className="text-primary" />
-                                    <h2 className="font-black text-black text-lg">Personal Information</h2>
+                                    <h2 className="font-bold text-lg">Personal Information</h2>
                                 </div>
                                 <div className="space-y-3">
                                     <div>
@@ -182,10 +182,10 @@ export default function ProfileSettings() {
                             </div>
 
                             {/* Contact Information */}
-                            <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-6">
+                            <div className="bg-white border border-gray-200 rounded-xl shadow p-6">
                                 <div className="flex items-center mb-4 gap-3">
                                     <Icon name="Mail" size={20} className="text-primary" />
-                                    <h2 className="font-black text-black text-lg">Contact</h2>
+                                    <h2 className="font-bold text-lg">Contact</h2>
                                 </div>
                                 <div className="space-y-3">
                                     <div>
@@ -200,10 +200,10 @@ export default function ProfileSettings() {
                             </div>
 
                             {/* Address */}
-                            <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-6">
+                            <div className="bg-white border border-gray-200 rounded-xl shadow p-6">
                                 <div className="flex items-center mb-4 gap-3">
                                     <Icon name="MapPin" size={20} className="text-primary" />
-                                    <h2 className="font-black text-black text-lg">Address</h2>
+                                    <h2 className="font-bold text-lg">Address</h2>
                                 </div>
                                 <div className="space-y-1">
                                     <div className="text-gray-800">{address.street || 'N/A'}</div>
@@ -215,10 +215,10 @@ export default function ProfileSettings() {
                             </div>
 
                             {/* Identity Verification */}
-                            <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-6">
+                            <div className="bg-white border border-gray-200 rounded-xl shadow p-6">
                                 <div className="flex items-center mb-4 gap-3">
                                     <Icon name="Shield" size={20} className="text-primary" />
-                                    <h2 className="font-black text-black text-lg">Identity Verification</h2>
+                                    <h2 className="font-bold text-lg">Identity Verification</h2>
                                 </div>
                                 <div className="space-y-3">
                                     <div>
@@ -238,42 +238,42 @@ export default function ProfileSettings() {
                         </div>
                         {/* Account Overview */}
                         {account && Object.keys(account).length > 0 ? (
-                            <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-8">
+                            <div className="bg-gradient-to-tr from-blue-50 to-green-50 border border-indigo-100 rounded-xl shadow p-8">
                                 <div className="flex items-center mb-4 gap-3">
                                     <Icon name="CreditCard" size={24} className="text-primary" />
-                                    <h2 className="font-black text-black text-lg">Active Account Details</h2>
+                                    <h2 className="font-bold text-lg">Active Account Details</h2>
                                 </div>
                                 <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                                     <div className="bg-white rounded-lg border px-5 py-4 shadow flex flex-col">
                                         <span className="text-xs text-gray-500 mb-1">Account Number</span>
                                         <span className="text-xl font-bold">{account.accountNumber || 'N/A'}</span>
                                     </div>
-                                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none px-5 py-4 flex flex-col">
+                                    <div className="bg-white rounded-lg border px-5 py-4 shadow flex flex-col">
                                         <span className="text-xs text-gray-500 mb-1">IFSC Code</span>
                                         <span className="text-lg font-semibold">{account.ifscCode || 'N/A'}</span>
                                     </div>
-                                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none px-5 py-4 flex flex-col">
+                                    <div className="bg-white rounded-lg border px-5 py-4 shadow flex flex-col">
                                         <span className="text-xs text-gray-500 mb-1">Type</span>
                                         <span className="font-medium">{account.type ? `${account.type} Account` : 'N/A'}</span>
                                     </div>
-                                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none px-5 py-4 flex flex-col">
+                                    <div className="bg-white rounded-lg border px-5 py-4 shadow flex flex-col">
                                         <span className="text-xs text-gray-500 mb-1">Branch</span>
                                         <span className="font-medium">{account.branchName || 'N/A'}</span>
                                     </div>
-                                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none px-5 py-4 flex flex-col">
+                                    <div className="bg-white rounded-lg border px-5 py-4 shadow flex flex-col">
                                         <span className="text-xs text-gray-500 mb-1">Status</span>
-                                        <span className="font-medium text-[#00C9B1]">{account.status || 'N/A'}</span>
+                                        <span className="font-medium text-green-600">{account.status || 'N/A'}</span>
                                     </div>
-                                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none px-5 py-4 flex flex-col">
+                                    <div className="bg-white rounded-lg border px-5 py-4 shadow flex flex-col">
                                         <span className="text-xs text-gray-500 mb-1">Current Balance</span>
-                                        <span className="text-2xl font-black text-black">
+                                        <span className="text-2xl font-bold text-green-700">
                                             ₹{account.currentBalance ? account.currentBalance.toLocaleString('en-IN') : '0'}
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         ) : (
-                            <div className="bg-[#FFD60A]/10 border-2 border-[#FFD60A] rounded-none p-6 text-center">
+                            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
                                 <p className="text-yellow-800">⚠️ No account information available</p>
                             </div>
                         )}

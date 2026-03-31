@@ -32,8 +32,8 @@ const QuickActions = ({ onTransfer }) => {
     ];
 
     return (
-        <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_#000]">
-            <h2 className="text-lg font-black text-black mb-4">Quick Actions</h2>
+        <div className="bg-card border border-border rounded-lg p-6 banking-shadow-md">
+            <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {quickActions?.map((action) => (
                     <div key={action?.id}>

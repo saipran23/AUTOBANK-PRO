@@ -104,8 +104,6 @@ export const createLoanApplication = async (customerEmail, loanData) => {
 
 export const approveLoanApplication = async (appId, customerEmail) => {
     try {
-        console.log("🔄 Starting approval for appId:", appId, "customerEmail:", customerEmail);
-
         if (!customerEmail) {
             return { success: false, error: 'Missing customer email' };
         }

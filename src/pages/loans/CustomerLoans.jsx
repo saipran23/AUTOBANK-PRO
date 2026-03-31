@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext.jsx";
-// Use with useContext(UserContext)
-import { useUser } from "../../context/UserContext.jsx";
-// Use as: const { user, setUser } = useUser();
+import { useAuth } from "../../contexts/AuthContext";
 
 const LoanStatusColors = {
     ongoing: "bg-blue-700 text-white",
@@ -56,7 +53,7 @@ const Section = ({ title, loans, color, onSelect }) => (
 );
 
 const CustomerLoans = () => {
-    const { user } = useContext(UserContext);
+    const { user } = useAuth();
     const [pending, setPending] = useState([]);
     const [ongoing, setOngoing] = useState([]);
     const [completed, setCompleted] = useState([]);
@@ -65,9 +62,10 @@ const CustomerLoans = () => {
     useEffect(() => {
         if (!user?.uid) return;
         const fetchLoans = async () => {
+            // Query pending applications by email (field stored in createLoanApplication)
             const pendingQuery = query(
                 collection(db, "loanApplications"),
-                where("userId", "==", user.uid)
+                where("email", "==", user.email)
             );
             const pendingSnap = await getDocs(pendingQuery);
             const pendingLoans = pendingSnap.docs
@@ -93,7 +91,7 @@ const CustomerLoans = () => {
             setCompleted(finishedLoans);
         };
         fetchLoans();
-    }, [user?.uid]);
+    }, [user?.uid, user?.email]);
 
     const handleSelectLoan = loanId => {
         navigate(`/loans/${loanId}`);

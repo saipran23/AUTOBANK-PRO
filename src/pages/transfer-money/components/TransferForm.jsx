@@ -74,6 +74,10 @@ const TransferForm = ({ formData, setFormData, accounts, onNext }) => {
         if (!accountVerified) {
             newErrors.recipientAccount = 'Please verify recipient account first';
         }
+        if (formData.sourceAccount && formData.recipientAccount &&
+            String(formData.sourceAccount) === String(formData.recipientAccount)) {
+            newErrors.recipientAccount = 'Cannot transfer to the same account';
+        }
         if (!formData.amount || parseFloat(formData.amount) <= 0) {
             newErrors.amount = 'Enter valid amount';
         }

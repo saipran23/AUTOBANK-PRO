@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Header from '../../components/ui/Header';
 import Icon from '../../components/AppIcon';
@@ -129,16 +129,19 @@ export default function Signup() {
 
         setIsLoading(true);
         try {
-            await createUserWithEmailAndPassword(
+            const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 formData.email.trim(),
                 formData.password
             );
 
+            const uid = userCredential.user.uid;
             const accountNumber = generateAccountNumber();
             const dateOfBirth = `${formData.dobDay}-${formData.dobMonth}-${formData.dobYear}`;
+            const customerID = `CUST${uid.slice(0, 8).toUpperCase()}`;
 
             const newUserData = {
+                customerID,
                 personalDetails: {
                     fullName: formData.fullName,
                     dateOfBirth: dateOfBirth,
@@ -164,13 +167,17 @@ export default function Signup() {
                         availableBalance: parseFloat(formData.initialDeposit),
                         name: formData.fullName,
                         ifscCode: 'UTIB0000001',
+                        branchName: 'Main Branch',
+                        status: 'Active',
+                        isPrimary: true,
                         transactions: [],
                     }
                 ],
                 createdAt: new Date().toISOString(),
             };
 
-            await addDoc(collection(db, 'customers'), newUserData);
+            // Use setDoc with UID so customers/{uid} document ID matches Firebase Auth uid
+            await setDoc(doc(db, 'customers', uid), newUserData);
             navigate('/account-created', { replace: true });
         } catch (error) {
             setErrors({ general: error.message || 'Sign up failed' });

@@ -18,7 +18,6 @@ const EmployeeDashboard = () => {
     // Redirect to login if not authenticated
     useEffect(() => {
         if (!authLoading && !user) {
-            console.log('❌ Not authenticated, redirecting to login');
             navigate("/employee/login", { replace: true });
         }
     }, [user, authLoading, navigate]);
@@ -33,9 +32,8 @@ const EmployeeDashboard = () => {
                 ...doc.data(),
             }));
             setCustomers(data);
-            console.log("✅ Customers fetched:", data.length);
         } catch (error) {
-            console.error("❌ Error fetching customers:", error);
+            console.error("Error fetching customers:", error);
         }
         setLoading(false);
     }
@@ -49,7 +47,7 @@ const EmployeeDashboard = () => {
             ).length;
             setUnreadChats(unread);
         } catch (error) {
-            console.error("❌ Error fetching unread chats:", error);
+            // Non-critical; silently ignore
         }
     }
 
@@ -66,12 +64,9 @@ const EmployeeDashboard = () => {
 
     const handleLogout = async () => {
         try {
-            console.log('🚪 Logging out employee...');
             await logout();
-            console.log('✅ Logout successful');
             navigate("/employee/login", { replace: true });
         } catch (error) {
-            console.error('❌ Logout error:', error);
             alert('Error logging out. Please try again.');
         }
     };
@@ -145,7 +140,7 @@ const EmployeeDashboard = () => {
         }, [activeAccount, showEdit]);
 
         function handlePhotoChange(e) {
-            const file = e.target.files;
+            const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => setEditPhotoUrl(reader.result);
@@ -159,6 +154,7 @@ const EmployeeDashboard = () => {
             try {
                 const customerDoc = doc(db, "customers", activeAccount.customer.id);
                 const addressParts = editAddress.split(",").map((s) => s.trim());
+                const [addrStreet = "", addrCity = "", addrState = "", addrPincode = ""] = addressParts;
                 await updateDoc(customerDoc, {
                     "personalDetails.fullName": editName,
                     "personalDetails.phoneNumber": editPhone,
@@ -167,17 +163,15 @@ const EmployeeDashboard = () => {
                     "personalDetails.gender": editGender,
                     "identity.aadharNumber": editAadhar,
                     "identity.panNumber": editPan,
-                    "address.street": addressParts || "",
-                    "address.city": addressParts || "",
-                    "address.state": addressParts || "",
-                    "address.pincode": addressParts || "",
+                    "address.street": addrStreet,
+                    "address.city": addrCity,
+                    "address.state": addrState,
+                    "address.pincode": addrPincode,
                     "photoUrl": editPhotoUrl,
                 });
-                console.log("✅ Customer updated successfully");
                 setShowEdit(false);
                 await fetchCustomerData();
             } catch (error) {
-                console.error("❌ Error updating customer:", error);
                 alert("Error updating customer. Please try again.");
             }
         }

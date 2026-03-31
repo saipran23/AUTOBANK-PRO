@@ -62,20 +62,20 @@ const EmployeeLogin = () => {
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-[#FFFEF0]">
+        <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-tr from-blue-100 via-blue-50 to-indigo-200">
             {/* Left badge/info column */}
             <div className="hidden lg:flex flex-col justify-between min-h-screen w-1/2 px-16 py-14 relative">
                 <div>
                     <div className="mb-8">
-                        <span className="inline-block p-3 bg-[#FFD60A] border-2 border-black shadow-[4px_4px_0px_#000] text-4xl">
+                        <span className="inline-block p-3 bg-gradient-to-br from-blue-800 to-indigo-800 text-white rounded-full shadow-xl text-4xl">
                             🏦
                         </span>
                         <div className="mt-6">
-                            <h1 className="text-[2.5rem] font-black text-black">AutoBank Pro</h1>
-                            <p className="text-xl font-bold text-gray-700 mt-2">Employee Portal</p>
+                            <h1 className="text-[2.5rem] font-black text-blue-900 drop-shadow">AutoBank Pro</h1>
+                            <p className="text-xl font-bold text-indigo-700 mt-2">Employee Portal</p>
                         </div>
                     </div>
-                    <ul className="mt-14 space-y-6 text-base font-bold text-black">
+                    <ul className="mt-14 space-y-6 text-base font-medium text-blue-900">
                         <li className="flex items-center">
                             <span className="text-green-500 text-xl mr-2">✔</span>24/7 Secure Access
                         </li>
@@ -97,22 +97,22 @@ const EmployeeLogin = () => {
                     </ul>
                 </div>
                 <div className="mb-2 opacity-90">
-                    <h3 className="font-bold text-black mb-3">Security Trust Badges</h3>
+                    <h3 className="font-bold text-blue-800 mb-3">Security Trust Badges</h3>
                     <div className="flex gap-4">
-                        <span className="px-4 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] flex items-center gap-2 text-black font-bold">
+                        <span className="px-4 py-2 bg-white/80 border border-blue-200 shadow rounded-xl flex items-center gap-2 text-blue-900">
                             <span role="img" aria-label="security">🔒</span> SSL / TLS
                         </span>
-                        <span className="px-4 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] flex items-center gap-2 text-black font-bold">
+                        <span className="px-4 py-2 bg-white/80 border border-blue-200 shadow rounded-xl flex items-center gap-2 text-blue-900">
                             <span role="img" aria-label="protection">🛡️</span> Multi-factor
                         </span>
-                        <span className="px-4 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] flex items-center gap-2 text-black font-bold">
+                        <span className="px-4 py-2 bg-white/80 border border-blue-200 shadow rounded-xl flex items-center gap-2 text-blue-900">
                             <span role="img" aria-label="insurance">🏦</span> FDIC Insured
                         </span>
-                        <span className="px-4 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] flex items-center gap-2 text-black font-bold">
+                        <span className="px-4 py-2 bg-white/80 border border-blue-200 shadow rounded-xl flex items-center gap-2 text-blue-900">
                             <span role="img" aria-label="compliance">⚙️</span> PCI / SOC-2
                         </span>
                     </div>
-                    <footer className="text-xs text-gray-500 mt-8">
+                    <footer className="text-xs text-blue-400 mt-8">
                         © {new Date().getFullYear()} AutoBank Pro. All rights reserved.
                     </footer>
                 </div>
@@ -120,19 +120,19 @@ const EmployeeLogin = () => {
 
             {/* Login Card */}
             <main className="w-full max-w-2xl px-8">
-                <div className="bg-white border-2 border-black shadow-[6px_6px_0px_#000] px-16 py-14 mt-8 mb-8 animate-fadein">
+                <div className="backdrop-blur-md bg-white/80 border border-blue-100 shadow-2xl rounded-3xl px-16 py-14 mt-8 mb-8 animate-fadein">
                     <div className="w-full flex flex-col items-center mb-8">
-                        <span className="text-7xl mb-6 bg-[#FFD60A] border-2 border-black shadow-[4px_4px_0px_#000] p-6">
+                        <span className="text-7xl mb-6 bg-gradient-to-br from-blue-600 to-indigo-500 p-6 shadow-lg rounded-full text-white">
                             🔐
                         </span>
-                        <h2 className="text-3xl font-black text-black mb-2">Employee Login</h2>
-                        <p className="text-gray-700 text-lg font-medium">Bank-grade access to secure tools</p>
+                        <h2 className="text-3xl font-extrabold text-blue-900 mb-2">Employee Login</h2>
+                        <p className="text-blue-600 text-lg font-medium">Bank-grade access to secure tools</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-8" autoComplete="off">
                         {/* Email Field */}
                         <div>
-                            <label className="block text-lg font-bold text-black mb-2">
+                            <label className="block text-lg font-semibold text-blue-900 mb-2">
                                 Email Address
                             </label>
                             <input
@@ -140,7 +140,7 @@ const EmployeeLogin = () => {
                                 placeholder="employee@autobank.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-6 py-4 border-2 border-black text-gray-800 bg-white placeholder-gray-400 focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium text-lg"
+                                className="w-full px-6 py-4 border border-blue-300 rounded-xl text-gray-800 bg-white/90 placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-lg"
                                 autoComplete="username"
                                 disabled={loading}
                                 required
@@ -149,7 +149,7 @@ const EmployeeLogin = () => {
 
                         {/* Password Field */}
                         <div>
-                            <label className="block text-lg font-bold text-black mb-2">
+                            <label className="block text-lg font-semibold text-blue-900 mb-2">
                                 Password
                             </label>
                             <input
@@ -157,7 +157,7 @@ const EmployeeLogin = () => {
                                 placeholder="Your secure password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-6 py-4 border-2 border-black text-gray-800 bg-white placeholder-gray-400 focus:outline-none focus:shadow-[3px_3px_0px_#FFD60A] transition font-medium text-lg"
+                                className="w-full px-6 py-4 border border-blue-300 rounded-xl text-gray-800 bg-white/90 placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition font-medium text-lg"
                                 autoComplete="current-password"
                                 disabled={loading}
                                 required
@@ -166,7 +166,7 @@ const EmployeeLogin = () => {
 
                         {/* Remember Me & Forgot Password */}
                         <div className="flex items-center justify-between text-base pt-1">
-                            <label className="flex items-center text-gray-700 font-medium cursor-not-allowed">
+                            <label className="flex items-center text-blue-600 cursor-not-allowed">
                                 <input
                                     type="checkbox"
                                     className="mr-2 accent-blue-500"
@@ -176,7 +176,7 @@ const EmployeeLogin = () => {
                             </label>
                             <button
                                 type="button"
-                                className="text-gray-500 font-semibold cursor-not-allowed"
+                                className="text-blue-400 hover:text-blue-600 font-semibold cursor-not-allowed"
                                 tabIndex={-1}
                                 disabled
                             >
@@ -186,7 +186,7 @@ const EmployeeLogin = () => {
 
                         {/* Error Message */}
                         {error && (
-                            <div className="bg-[#FF6B6B]/10 border-2 border-[#FF6B6B] text-black font-bold p-4 text-center text-lg">
+                            <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg p-4 text-center text-lg font-medium animate-pulse">
                                 {error}
                             </div>
                         )}
@@ -194,14 +194,14 @@ const EmployeeLogin = () => {
                         {/* Sign In Button */}
                         <button
                             type="submit"
-                            className={`w-full bg-[#FFD60A] text-black border-2 border-black font-black text-2xl shadow-[4px_4px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all py-4 flex items-center justify-center ${
+                            className={`w-full bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white py-4 rounded-xl font-bold text-2xl shadow-xl transition-all flex items-center justify-center ${
                                 loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
                             }`}
                             disabled={loading}
                         >
                             {loading ? (
                                 <>
-                                    <span className="inline-block animate-spin h-6 w-6 border-2 border-gray-200 border-b-black rounded-full mr-3"></span>
+                                    <span className="inline-block animate-spin h-6 w-6 border-2 border-blue-100 border-b-blue-700 rounded-full mr-3"></span>
                                     Signing In...
                                 </>
                             ) : (
@@ -211,12 +211,12 @@ const EmployeeLogin = () => {
                     </form>
 
                     {/* Register Link */}
-                    <div className="mt-8 text-center text-base text-black font-medium">
+                    <div className="mt-8 text-center text-base text-blue-800">
                         Don't have an account?{" "}
                         <button
                             type="button"
                             onClick={handleNavigateSignup}
-                            className="text-black font-bold hover:underline cursor-pointer transition-colors"
+                            className="text-blue-600 hover:text-blue-800 font-semibold underline underline-offset-2 cursor-pointer transition-colors"
                             disabled={loading}
                         >
                             Register here
@@ -224,11 +224,11 @@ const EmployeeLogin = () => {
                     </div>
 
                     {/* Back to Home Link */}
-                    <div className="text-center mt-4 text-base">
+                    <div className="text-center mt-4 text-base text-blue-500">
                         <button
                             type="button"
                             onClick={handleNavigateHome}
-                            className="text-black font-bold hover:underline cursor-pointer transition-colors"
+                            className="text-blue-600 hover:text-blue-800 hover:underline font-medium cursor-pointer transition-colors"
                             disabled={loading}
                         >
                             ← Back to Home

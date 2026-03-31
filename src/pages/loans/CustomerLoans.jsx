@@ -8,46 +8,46 @@ import { useUser } from "../../context/UserContext.jsx";
 // Use as: const { user, setUser } = useUser();
 
 const LoanStatusColors = {
-    ongoing: "bg-[#00C9B1]",
-    pending: "bg-[#FFD60A]",
-    completed: "bg-[#00C9B1]",
+    ongoing: "bg-blue-700 text-white",
+    pending: "bg-yellow-500 text-gray-900",
+    completed: "bg-green-600 text-white",
 };
 
 const Section = ({ title, loans, color, onSelect }) => (
     <div className="mb-10">
-        <h2 className="text-xl font-black text-black mb-4">{title}</h2>
+        <h2 className={`text-xl font-bold mb-4 ${color}`}>{title}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loans.length === 0 && (
-                <div className="col-span-full text-center text-gray-500">
+                <div className="col-span-full text-center text-muted-foreground">
                     No loans in this section.
                 </div>
             )}
             {loans.map(loan => (
                 <div
                     key={loan.id}
-                    className="bg-white border-2 border-black shadow-[4px_4px_0px_#000] rounded-none p-5 cursor-pointer hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#000] transition-all"
+                    className="bg-card border border-border rounded-lg shadow-sm p-5 cursor-pointer hover:ring-2 hover:ring-primary transition"
                     onClick={() => onSelect && onSelect(loan.id)}
                 >
                     <div className="flex items-center justify-between mb-2">
                         <span className="font-semibold">{loan.loanType || loan.loanDetails?.loanType}</span>
-                        <span className={`px-3 py-1 text-xs rounded-none border-2 border-black font-bold ${color}`}>
+                        <span className={`px-3 py-1 text-xs rounded-full ${color}`}>
               {title}
             </span>
                     </div>
                     <div className="mb-2">
-                        <span className="text-gray-600">Principal:&nbsp;</span>
+                        <span className="text-muted-foreground">Principal:&nbsp;</span>
                         <span>₹{(loan.loanAmount || loan.principalAmount || 0).toLocaleString()}</span>
                     </div>
                     <div className="mb-2">
-                        <span className="text-gray-600">EMI:&nbsp;</span>
+                        <span className="text-muted-foreground">EMI:&nbsp;</span>
                         <span>₹{loan.emi || loan.monthlyPayment}</span>
                     </div>
                     <div>
-                        <span className="text-gray-600">Term:&nbsp;</span>
+                        <span className="text-muted-foreground">Term:&nbsp;</span>
                         <span>{loan.tenure || loan.totalTerm} months</span>
                     </div>
                     <div className="mt-4 text-right">
-                        <span className="text-xs text-gray-500">ID: {loan.id}</span>
+                        <span className="text-xs text-muted-foreground">ID: {loan.id}</span>
                     </div>
                 </div>
             ))}
@@ -100,9 +100,8 @@ const CustomerLoans = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#FFFEF0]">
         <div className="max-w-5xl mx-auto w-full mt-8 mb-16 px-4">
-            <h1 className="text-3xl font-black text-black mb-8">My Loans</h1>
+            <h1 className="text-3xl font-bold text-primary mb-8">My Loans</h1>
             <Section
                 title="Ongoing Loans"
                 loans={ongoing}
@@ -121,7 +120,6 @@ const CustomerLoans = () => {
                 color={LoanStatusColors.completed}
                 onSelect={handleSelectLoan}
             />
-        </div>
         </div>
     );
 };

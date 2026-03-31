@@ -105,6 +105,7 @@ export const processMoneyTransfer = async (transferData) => {
             return { success: false, error: "Cannot transfer to the same account" };
         }
 
+        // totalDebit = transfer amount + any applicable fees (deducted from sender)
         const totalDebit = parsedAmount + parsedFee;
 
         // Locate document references BEFORE the transaction (getDocs is not allowed inside runTransaction)

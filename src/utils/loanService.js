@@ -265,7 +265,8 @@ export const repayEMI = async (customerEmail, loanId) => {
             const loan = loanSnap.data();
 
             // Guard: do not process payment on a closed loan
-            if (loan.status === 'Closed' || loan.status === 'closed') {
+            const loanStatus = (loan.status || '').toLowerCase();
+            if (loanStatus === 'closed' || loanStatus === 'completed' || loanStatus === 'paid') {
                 throw new Error('This loan is already fully repaid');
             }
 

@@ -170,17 +170,17 @@ const TransferSuccess = ({ transferResult = {}, onNavigate }) => {
                 {/* Action Buttons */}
                 <div className="space-y-3">
                     <button
-                        onClick={() => navigate('/account-details')}
+                        onClick={() => navigate('/customer-dashboard')}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
                     >
                         Go to Dashboard
                     </button>
 
                     <button
-                        onClick={() => navigate('/accounts')}
+                        onClick={() => navigate('/account-details')}
                         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold py-3 px-4 rounded-lg transition-colors"
                     >
-                        View All Accounts
+                        View Account Details
                     </button>
                     <button
                         onClick={() => navigate('/transfer-money')}

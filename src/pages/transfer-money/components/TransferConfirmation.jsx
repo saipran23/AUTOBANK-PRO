@@ -1,20 +1,15 @@
 
-import React, { useState } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
-import { processMoneyTransfer } from '../../../utils/transferService';
+import React from 'react';
 import Button from '../../../components/ui/Button';
 
 const TransferConfirmation = ({
-                                  formData,
-                                  accounts,
-                                  onConfirm,
-                                  onBack,
-                                  onCancel,
-                              }) => {
-    const { user } = useAuth();
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [error, setError] = useState(null);
-
+    formData,
+    accounts,
+    onConfirm,
+    onBack,
+    onCancel,
+    isProcessing,
+}) => {
     // Find account by ID or number
     const getAccountInfo = (accountNumber) =>
         accounts.find(
@@ -37,124 +32,17 @@ const TransferConfirmation = ({
             type: formData.accountType || "Recipient Account"
         };
 
-
-    // If transfer type missing, keep as internal
     const fees = formData.transferType === 'external' ? 2.5 : 0;
     const totalAmount = parseFloat(formData.amount) + fees;
 
-    // ════════════════════════════════════════════════════════════════════════════════
-    // ✅ UPDATED: handleConfirm FUNCTION WITH VALIDATION + REAL-TIME FIRESTORE SYNC
-    // ════════════════════════════════════════════════════════════════════════════════
-
-    const handleConfirm = async () => {
-        console.log("🔄 TransferConfirmation: Starting transfer confirmation...");
-        setIsProcessing(true);
-        setError(null);
-
-        try {
-            // ✅ VALIDATION 1: Check all required form data exists
-            if (!formData.sourceAccount || !formData.destinationAccount || !formData.amount) {
-                console.error("❌ Missing required fields in formData");
-                console.log("   sourceAccount:", formData.sourceAccount);
-                console.log("   destinationAccount:", formData.destinationAccount);
-                console.log("   amount:", formData.amount);
-
-                setError("❌ Missing required transfer information. Please check all fields and try again.");
-                setIsProcessing(false);
-                return;
-            }
-
-            // ✅ VALIDATION 2: Check if accounts exist in the accounts array
-            if (!sourceAccount.accountNumber || !formData.destinationAccount) {
-                console.error("❌ Accounts not found in accounts array");
-                console.log("   sourceAccount found:", !!sourceAccount.accountNumber);
-                console.log("   destinationAccount found:", !!destinationAccount.accountNumber);
-                console.log("   Available accounts:", accounts.map(a => a.accountNumber));
-
-                setError("❌ Account details not found. Please verify account numbers and try again.");
-                setIsProcessing(false);
-                return;
-            }
-
-            // Get account details
-            console.log("📋 TransferConfirmation: Preparing transfer data...");
-            console.log("   From Account:", sourceAccount.accountNumber);
-            console.log("   To Account:", destinationAccount.accountNumber);
-            console.log("   Amount: ₹" + parseFloat(formData.amount).toLocaleString('en-IN'));
-
-            // ✅ Call updated processMoneyTransfer function (from STEP 1)
-            // This function:
-            // 1. Finds both accounts in Firestore
-            // 2. Validates balance
-            // 3. Creates atomic batch update
-            // 4. Updates BOTH accounts in Firestore
-            // 5. Returns transaction details
-
-            console.log("⏳ TransferConfirmation: Calling processMoneyTransfer()...");
-
-            const result = await processMoneyTransfer({
-                senderAccountNumber: sourceAccount.accountNumber,
-                recipientAccountNumber: destinationAccount.accountNumber,
-                amount: parseFloat(formData.amount),
-                transferType: formData.transferType || 'internal',
-                description: formData.description || '',
-            });
-
-            console.log("📊 TransferConfirmation: Transfer result received:", result);
-
-            if (result.success && result.data) {
-                // ✅ Transfer successful
-                // Firestore has been updated with atomic batch
-                // Real-time listeners (Dashboard from STEP 2) will automatically fire
-
-                console.log("✅ TransferConfirmation: Transfer successful!");
-                console.log("   Transaction ID:", result.data.transactionId);
-                console.log("   UTR Number:", result.data.utrNumber);
-                console.log("   New Sender Balance:", result.data.senderNewBalance);
-                console.log("   New Recipient Balance:", result.data.recipientNewBalance);
-
-                // Call parent callback with complete transaction details
-                onConfirm({
-                    amount: parseFloat(formData.amount),
-                    from: sourceAccount.accountNumber,
-                    to: destinationAccount.accountNumber,
-                    toAccountName: destinationAccount.name,
-                    recipientName: destinationAccount.name || 'Recipient',
-                    transactionId: result.data.transactionId,
-                    utrNumber: result.data.utrNumber,
-                    timestamp: result.data.timestamp,
-                    senderNewBalance: result.data.senderNewBalance,
-                    recipientNewBalance: result.data.recipientNewBalance,
-                    transferStatus: 'completed',
-                });
-
-                console.log("✅ TransferConfirmation: Callback executed, navigating to success...");
-            } else {
-                // ❌ Transfer failed
-                console.error("❌ TransferConfirmation: Transfer failed");
-                console.error("   Error:", result.error);
-                setError(result.error || 'Transfer failed. Please try again.');
-            }
-        } catch (err) {
-            console.error("❌ TransferConfirmation: Unexpected error:", err);
-            setError(
-                err.message || 'An unexpected error occurred during transfer.'
-            );
-        } finally {
-            setIsProcessing(false);
-        }
+    // Delegate all processing to the parent; this component is display-only.
+    const handleConfirm = () => {
+        onConfirm();
     };
 
     return (
         <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Confirm Your Transfer</h2>
-
-            {error && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-700 font-semibold">Error</p>
-                    <p className="text-red-600">{error}</p>
-                </div>
-            )}
 
             {/* Transfer Details */}
             <div className="space-y-6 mb-8">
@@ -259,13 +147,15 @@ const TransferConfirmation = ({
                 >
                     Back
                 </Button>
-                <Button
-                    variant="danger"
-                    onClick={onCancel}
-                    disabled={isProcessing}
-                >
-                    Cancel
-                </Button>
+                {onCancel && (
+                    <Button
+                        variant="danger"
+                        onClick={onCancel}
+                        disabled={isProcessing}
+                    >
+                        Cancel
+                    </Button>
+                )}
                 <Button
                     variant="primary"
                     onClick={handleConfirm}
